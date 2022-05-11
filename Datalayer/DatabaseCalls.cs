@@ -1,8 +1,7 @@
 ﻿namespace Datalayer;
 
 
-//i didnt extend? idr the word the repo interface  yet btw ~leo
-public class DatabaseCalls
+public class DatabaseCalls : repo
 {
 
     //please sort and comment based on the group's sections if we do ~leo
@@ -45,6 +44,6 @@ public class DatabaseCalls
             uses -> checkExisting(user user) before pushing to db
         loginUser (user user)
             uses -> authenticateUser(user user) -> returns either the user or something if it dont work idk w/e 
-    figure out password hashing for create user ^^ ~leo
+    figure out password hashing for create user ^^ ~leo also prob rename things that dont make it sound like they came out of my brain cause its fucked in there
 
 */
