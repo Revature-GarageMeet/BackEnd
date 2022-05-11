@@ -12,6 +12,6 @@ namespace Models
     int userid?
     int likes
     date datecreated
-    int bandid
-    type type //post based on band/user posts (use bool for it or maybe int for id type)  
+    int bandid 
+    type type //post based on band/user posts (use bool for it or maybe int for id type)  ~leo
 */
