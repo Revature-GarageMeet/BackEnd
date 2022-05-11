@@ -1,17 +1,81 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
-        "projectName": "WebAPI",
-        "projectPath": "c:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "projectName": "Datalayer",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj",
         "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlserver": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj",
+        "projectName": "Models",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,7 +103,76 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
+        "projectName": "WebAPI",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj": {
+                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj"
+              },
+              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlserver": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
