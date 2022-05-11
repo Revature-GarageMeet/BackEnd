@@ -5,7 +5,7 @@ namespace Models
         /// <summary>
         /// Band Member's Id
         /// </summary>
-        /// <value>Band's Member's Id</value>
+        /// <value>Band Member's Id</value> 
         public int id { get; set; }
 
         /// <summary>
