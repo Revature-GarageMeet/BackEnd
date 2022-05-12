@@ -29,9 +29,9 @@ public class PostController : ControllerBase
 
 
     [HttpGet("GetPostbyUID/{userID}")]
-    public async Task<List<Post>> getPost()
+    public async Task<List<Post>> getPost(int userId)
     {
-        
+        return await _db.GetPostByUserIDAsync(userId);
     }
 
     // Get Posts by user object ~ Matthew
@@ -56,12 +56,14 @@ public class PostController : ControllerBase
     public async Task postForBand(User user, int bandId, string textEntry)
     {
         // check if user is in the band or something
-        await _db.postForBand(bandId, textEntry);
+        await _db.postForBandAsync(bandId, textEntry);
     }
 
-
-
-
+    [HttpPut("LikePost")]
+    public async Task likePost(int postId, User user)
+    {
+        await _db.likePostAsync(postId, user);
+    }
 }
 /*
     post create post

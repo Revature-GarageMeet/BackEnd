@@ -3,6 +3,11 @@
 
 public class DatabaseCalls : repo
 {
+    private readonly GADBContext _context;
+    public DatabaseCalls(GADBContext context)
+    {
+        _context = context;
+    }
 
     //please sort and comment based on the group's sections if we do ~leo
 
@@ -36,7 +41,10 @@ public class DatabaseCalls : repo
         /// <returns>A List of Posts of all the posts by a specific user.</returns>
         public async Task<List<Post>> GetPostsByUserAsync(User user)
         {
-            await new Task<List<Post>>();
+            return await _context.Posts
+                .FromSqlRawith($"SELECT * FROM Posts WHERE userId = {user.id} ")
+                .ToListAsync();
+            
         }
 
     //Group/Team things

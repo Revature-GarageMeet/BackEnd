@@ -38,6 +38,11 @@ namespace Models
         /// </summary>
         /// <value>Type of Post</value>
         public Boolean type { get; set; }
+        ///<summary>
+        ///Holds comments tied to the post
+        ///</summary>
+        /// <value>List of comments</value>
+        public List<Comment> postComments {get; set;}
     }
 }
 
