@@ -28,7 +28,16 @@ public class DatabaseCalls : repo
     }
 
     //Post Related things
-
+        // get all posts by a User ~ Matthew
+        /// <summary>
+        /// Gets All the posts by a specific user by user object.
+        /// </summary>
+        /// <param name="user">User object to find posts for.</param>
+        /// <returns>A List of Posts of all the posts by a specific user.</returns>
+        public async Task<List<Post>> GetPostsByUserAsync(User user)
+        {
+            await new Task<List<Post>>();
+        }
 
     //Group/Team things
 
