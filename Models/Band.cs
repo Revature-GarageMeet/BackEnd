@@ -32,4 +32,5 @@ namespace Models
     string title
     string description
     int memberLimit
+    ~Leo
 */
