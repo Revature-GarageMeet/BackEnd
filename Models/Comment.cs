@@ -51,4 +51,5 @@ public class Comment
     string entry
     int likes
     DateTime dateCreated
+    ~Leo
 */

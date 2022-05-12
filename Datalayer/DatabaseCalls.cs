@@ -1,51 +1,61 @@
-﻿namespace Datalayer;
+﻿using System.Linq;
+namespace Datalayer;
 
 
-public class DatabaseCalls : repo
+public class DatabaseCalls : DBInterface
 {
-    private readonly GADBContext _context;
-    public DatabaseCalls(GADBContext context)
+    private readonly GMDBContext _context;
+    public DatabaseCalls(GMDBContext context)
     {
         _context = context;
     }
 
     //please sort and comment based on the group's sections if we do ~leo
+    //CODE ONLY, DOCUMENTATION (of what it does) GOES IN THE INTERFACE
 
 
     //User Login/Registration things
-    public async Task<User> createUser(User user){
-        return user;
-        // throw NotImplementedException ex;
+    public async Task<User> createUser(User user)
+    {
+        if (await checkExisting(user))
+        {
+            //User Already Exists, throw an exception or something
+            //THIS NEEDS TO BE DONE STILL
+            return user;
+        }
+        else
+        {
+            //prob need to add other default values to user still
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
     }
-
-    public async Task loginUser(User user){
-
+    public async Task<User> loginUser(User auth)
+    {
+        if (await authenticateUser(auth))
+        {
+            //If username and password match then give the user back
+            return await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username && user.password == auth.password);
+        }
+        else
+        {
+            //if fail then throw an exception or something
+            return auth;
+        }
     }
-
-    public async Task<Boolean> checkExisting(User user){
-        //prob rename that ^ but this is supposed to check if the username's already taken ~leo
-        return true;
+    public async Task<Boolean> checkExisting(User auth)
+    {
+        return await _context.Users.AnyAsync(user => user.username == auth.username);
     }
-
-    public async Task<Boolean> authenticateUser(User user){
-        //this one checks if the username and password match  ~leo
-        return true;
+    public async Task<Boolean> authenticateUser(User auth)
+    {
+        return await _context.Users.AnyAsync(user => user.username == auth.username && user.password == auth.password);
     }
 
     //Post Related things
-        // get all posts by a User ~ Matthew
-        /// <summary>
-        /// Gets All the posts by a specific user by user object.
-        /// </summary>
-        /// <param name="user">User object to find posts for.</param>
-        /// <returns>A List of Posts of all the posts by a specific user.</returns>
-        public async Task<List<Post>> GetPostsByUserAsync(User user)
-        {
-            return await _context.Posts
-                .FromSqlRawith($"SELECT * FROM Posts WHERE userId = {user.id} ")
-                .ToListAsync();
-            
-        }
+
 
     //Group/Team things
 
