@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {}
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\obj\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",

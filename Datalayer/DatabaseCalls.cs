@@ -1,10 +1,11 @@
 ﻿namespace Datalayer;
 
 
-public class DatabaseCalls : repo
+public class DatabaseCalls : DBInterface
 {
 
     //please sort and comment based on the group's sections if we do ~leo
+    //CODE ONLY, DOCUMENTATION (of what it does) GOES IN THE INTERFACE
 
 
     //User Login/Registration things
@@ -13,12 +14,13 @@ public class DatabaseCalls : repo
         // throw NotImplementedException ex;
     }
 
-    public async Task loginUser(User user){
-
+    public async Task<User> loginUser(User user){
+        return user;
     }
 
     public async Task<Boolean> checkExisting(User user){
         //prob rename that ^ but this is supposed to check if the username's already taken ~leo
+        //used for
         return true;
     }
 
