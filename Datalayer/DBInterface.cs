@@ -34,5 +34,9 @@ namespace Datalayer
 
 
         //Group/Team things
+        Task<List<BandMember>> GetAllBandMembers(int bandId);
+        Task<BandMember> CreateBandMember(BandMember newMember);
+        Task RemoveBandMember(BandMember memberToDelete);
+
     }
 }
