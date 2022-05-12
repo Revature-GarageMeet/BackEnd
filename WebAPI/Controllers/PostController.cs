@@ -29,13 +29,13 @@ public class PostController : ControllerBase
 
 
     [HttpGet("GetPostbyUID/{userID}")]
-    public async Task<List<Post>> getPost(int userId)
+    public async Task<List<Post>> getPostbyUserID(int userId)
     {
-        return await _db.GetPostByUserIDAsync(userId);
+        return await _db.GetPostByUserIdAsync(userId);
     }
 
     // Get Posts by user object ~ Matthew
-    [HttpGet("GetPostsByUser")]
+    [HttpGet("GetPostsByUser/{user}")]
     /// <summary>
     /// Gets All the posts by a specific user by user object.
     /// </summary>
@@ -46,20 +46,32 @@ public class PostController : ControllerBase
         return await _db.GetPostsByUserAsync(user);
     }
     
-    [HttpGet("GetPostByBandID")]
+    [HttpGet("GetPostByBandID/{bandId}")]
     public async Task<List<Post>> getPostbyBandID(int bandId)
     {
         return await _db.GetPostByBandIDAsync(bandId);
     }
 
-    [HttpPost("PostForBand")]
-    public async Task postForBand(User user, int bandId, string textEntry)
+    [HttpPost("PostForBand/{bandId}/{textEntry}")]
+    public async Task postForBand(int bandId, string textEntry)
     {
-        // check if user is in the band or something
+        // We could specify the user later
         await _db.postForBandAsync(bandId, textEntry);
     }
 
-    [HttpPut("LikePost")]
+    [HttpPost("PostForUser/{user}/{textEntry")]
+    public async Task postForUser(User user, string textEntry)
+    {
+        await _db.postForUserAsync(user, textEntry);
+    }
+    
+    [HttpPost("PostForUserId/{userId}/{textEntry}")]
+    public async Task postForUserId(int userId, string textEntry)
+    {
+        await _db.postForUserIdAsync(userId, textEntry);
+    }
+
+    [HttpPut("LikePost/{postId}/{user}")]
     public async Task likePost(int postId, User user)
     {
         await _db.likePostAsync(postId, user);

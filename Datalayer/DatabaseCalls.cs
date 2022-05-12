@@ -55,6 +55,60 @@ public class DatabaseCalls : DBInterface
     }
 
     //Post Related things
+    public async Task<List<Post>> GetPostsByUserAsync(User user)
+    {
+        return await _context.Users
+            .FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}")
+            .ToListAsync();
+    }
+    public async Task<List<Post>> getPostbyUserIdAsync(int userId)
+    {
+        return await _context.Users
+            .FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}")
+            .ToListAsync();
+    }
+
+    public async Task<List<Post>> GetPostsByBandIDAsync(int bandId)
+    {
+        // please let me know if this doesn't work -- brandon
+        return await _context.Posts.AnyAsync(entry => bandId == Posts.bandId);
+    }
+
+    public async Task CreatePostForBandAsync(int bandId, string textEntry)
+    {
+        // We could specify the user later
+        // please also let me know if this doesn't work -- brandon
+        await _context.Posts.FirstOrDefaultAsync(entry => bandId == Posts.bandId);
+        _context.Posts.Update(textEntry);
+        await _context.SaveChangesAsync();
+    }
+    public async Task postForUserAsync(User user, string textEntry)
+    {
+        Post post = new Post(){
+        this.entry = textEntry,
+        this.userId = user.Id,
+        this.likes = 0,
+        this.dateCreated = DateTime.Now
+        };
+        _context.Posts.Add(post);
+        await _ContextBoundObject.SaveChangesAsync();
+    }
+    public async Task postForUserIdAsync(int userId, string textEntry)
+    {
+        Post post = new Post(){
+        this.entry = textEntry,
+        this.userId = userId,
+        this.likes = 0,
+        this.dateCreated = DateTime.Now
+        };
+        _context.Posts.Add(post);
+        await _ContextBoundObject.SaveChangesAsync();
+    }
+
+    public async Task LikePostAsync(int postId, User user)
+    {
+    
+    }
 
 
     //Group/Team things
