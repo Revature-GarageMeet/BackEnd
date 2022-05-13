@@ -66,5 +66,9 @@ namespace Datalayer
         Task<BandMember> CreateBandMember(BandMember newMember);
         Task RemoveBandMember(BandMember memberToDelete);
 
+        //Post Related things
+
+
+        //Group/Team things
     }
 }
