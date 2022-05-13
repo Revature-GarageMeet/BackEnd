@@ -54,60 +54,46 @@ public class DatabaseCalls : DBInterface
         return await _context.Users.AnyAsync(user => user.username == auth.username && user.password == auth.password);
     }
 
-    //Post Related things
+    //************************************************ Post Related Things ************************************************
     public async Task<List<Post>> GetPostsByUserAsync(User user)
     {
-        return await _context.Users
-            .FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}")
-            .ToListAsync();
+        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
     }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
-        return await _context.Users
-            .FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}")
-            .ToListAsync();
+        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
     }
 
-    public async Task<List<Post>> GetPostsByBandIDAsync(int bandId)
+    public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
     {
-        // please let me know if this doesn't work -- brandon
-        return await _context.Posts.AnyAsync(entry => bandId == Posts.bandId);
+        return await _context.Posts.AsNoTracking().Where(post => post.bandId == bandId).ToListAsync();
     }
 
-    public async Task CreatePostForBandAsync(int bandId, string textEntry)
+    public async Task postForBandAsync(int bandId, string textEntry)
     {
-        // We could specify the user later
-        // please also let me know if this doesn't work -- brandon
-        await _context.Posts.FirstOrDefaultAsync(entry => bandId == Posts.bandId);
-        _context.Posts.Update(textEntry);
+        Post post = new Post() {entry = textEntry, bandId = bandId};
+        _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
+    
     public async Task postForUserAsync(User user, string textEntry)
     {
-        Post post = new Post(){
-        this.entry = textEntry,
-        this.userId = user.Id,
-        this.likes = 0,
-        this.dateCreated = DateTime.Now
-        };
+        Post post = new Post() {entry = textEntry, userId = user.id, likes = 0, dateCreated = DateTime.Now};
         _context.Posts.Add(post);
-        await _ContextBoundObject.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
     public async Task postForUserIdAsync(int userId, string textEntry)
     {
-        Post post = new Post(){
-        this.entry = textEntry,
-        this.userId = userId,
-        this.likes = 0,
-        this.dateCreated = DateTime.Now
-        };
+        Post post = new Post() {entry = textEntry, userId = userId, likes = 0, dateCreated = DateTime.Now};
         _context.Posts.Add(post);
-        await _ContextBoundObject.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 
-    public async Task LikePostAsync(int postId, User user)
+    public async Task likePostAsync(int postId, User user)
     {
-    
+        // might not work, just put it here for now. Also allows for inifite likes
+        _context.Posts.FromSqlRaw($"UPDATE Post SET likes = likes + 1 WHERE postId = {postId}");
+        await _context.SaveChangesAsync();
     }
 
 
