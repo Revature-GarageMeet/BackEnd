@@ -113,6 +113,26 @@ public class DatabaseCalls : DBInterface
 
     //Group/Team things
 
+    // Gets all members for a single Band ~Bailey
+    public async Task<List<BandMember>> GetAllBandMembers(int bandId)
+    {
+        return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
+    }
+
+    // Adds new member to database ~Bailey
+    public async Task<BandMember> CreateBandMember(BandMember newMember)
+    {
+        _context.BandMembers.Add(newMember);
+        await _context.SaveChangesAsync();
+        return newMember;
+    }
+
+    // Removes a member from the database ~Bailey
+    public async Task RemoveBandMember(BandMember memberToDelete)
+    {
+        _context.BandMembers.Remove(memberToDelete);
+        await _context.SaveChangesAsync();
+    }
 }
 
 
