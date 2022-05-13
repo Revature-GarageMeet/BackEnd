@@ -3,6 +3,7 @@ using Serilog;
 using Microsoft.EntityFrameworkCore;
 // using Microsoft.AspNetCore;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog(
@@ -10,6 +11,17 @@ builder.Host.UseSerilog(
     .WriteTo.Console()
     .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
 );
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+                      });
+});
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
@@ -31,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
