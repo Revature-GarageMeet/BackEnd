@@ -21,8 +21,8 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class PostController : ControllerBase
 {
-    private readonly repo _db;
-    public PostController(repo db)
+    private readonly DBInterface _db;
+    public PostController(DBInterface db)
     {
         _db = db;
     }
@@ -31,7 +31,7 @@ public class PostController : ControllerBase
     [HttpGet("GetPostbyUID/{userID}")]
     public async Task<List<Post>> getPostbyUserID(int userId)
     {
-        return await _db.GetPostByUserIdAsync(userId);
+        return await _db.getPostbyUserIdAsync(userId);
     }
 
     // Get Posts by user object ~ Matthew
@@ -49,7 +49,7 @@ public class PostController : ControllerBase
     [HttpGet("GetPostByBandID/{bandId}")]
     public async Task<List<Post>> getPostbyBandID(int bandId)
     {
-        return await _db.GetPostByBandIDAsync(bandId);
+        return await _db.getPostbyBandIdAsync(bandId);
     }
 
     [HttpPost("PostForBand/{bandId}/{textEntry}")]
