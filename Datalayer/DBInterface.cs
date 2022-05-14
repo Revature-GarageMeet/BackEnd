@@ -62,13 +62,24 @@ namespace Datalayer
 
 
         //Group/Team things
+        /// <summary>
+        /// Gets all band members for a single Band group/team ~Bailey
+        /// </summary>
+        /// <param name="bandId">Integer value to be used to find certain records in database</param>
+        /// <returns>A list of individual BandMember objects</returns>
         Task<List<BandMember>> GetAllBandMembers(int bandId);
+        /// <summary>
+        /// Adds a new BandMember record to the BandMember DB Table ~Bailey
+        /// </summary>
+        /// <param name="newMember">A BandMember object to be added</param>
+        /// <returns>The newly created bandMember object</returns>
         Task<BandMember> CreateBandMember(BandMember newMember);
+        /// <summary>
+        /// Removes a BandMember record from the BandMember DB Table ~Bailey
+        /// </summary>
+        /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
         Task RemoveBandMember(BandMember memberToDelete);
 
         //Post Related things
-
-
-        //Group/Team things
     }
 }
