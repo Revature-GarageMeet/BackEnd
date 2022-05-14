@@ -8,10 +8,9 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class BandMemberController : ControllerBase
 {
-
     private readonly DBInterface _dl;
 
-    BandMemberController(DBInterface dl)
+    public BandMemberController(DBInterface dl)
     {
         _dl = dl;
     }
@@ -26,6 +25,7 @@ public class BandMemberController : ControllerBase
     [HttpPost]
     public async Task<BandMember> Post(BandMember newMember)
     {
+        newMember.dateJoined = DateTime.UtcNow;
         return await _dl.CreateBandMember(newMember);
     }
 
