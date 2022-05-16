@@ -71,20 +71,20 @@ public class DatabaseCalls : DBInterface
 
     public async Task postForBandAsync(int bandId, string textEntry)
     {
-        Post post = new Post() {entry = textEntry, bandId = bandId};
+        Post post = new Post() { entry = textEntry, bandId = bandId };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task postForUserAsync(User user, string textEntry)
     {
-        Post post = new Post() {entry = textEntry, userId = user.id, likes = 0, dateCreated = DateTime.Now};
+        Post post = new Post() { entry = textEntry, userId = user.id, likes = 0, dateCreated = DateTime.Now };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
     public async Task postForUserIdAsync(int userId, string textEntry)
     {
-        Post post = new Post() {entry = textEntry, userId = userId, likes = 0, dateCreated = DateTime.Now};
+        Post post = new Post() { entry = textEntry, userId = userId, likes = 0, dateCreated = DateTime.Now };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
@@ -94,6 +94,51 @@ public class DatabaseCalls : DBInterface
         // might not work, just put it here for now. Also allows for inifite likes
         _context.Posts.FromSqlRaw($"UPDATE Post SET likes = likes + 1 WHERE postId = {postId}");
         await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    ///     Author: Jose
+    ///     Context: Creates comment in database
+    /// </summary>
+    /// <param name="commentToAdd"></param>
+    /// <returns></returns>
+    public async Task AddCommentAsync(Comment commentToAdd)
+    {
+        await _context.Comments.AddAsync(commentToAdd);
+        await _context.SaveChangesAsync();
+    }
+    /// <summary>
+    ///     Author: Jose
+    ///     Context: Gets comment by comment id from database
+    /// </summary>
+    /// <param name="commentId"></param>
+    /// <returns>Returns comment respective to the id</returns>
+    public async Task<Comment> GetCommentAsync(int commentId)
+    {
+        return await _context.Comments.FirstOrDefaultAsync(comment => comment.id == commentId);
+    }
+    /// <summary>
+    ///     Author: Jose
+    ///     Context: Gets all comments from post id from database
+    /// </summary>
+    /// <param name="postId"></param>
+    /// <returns>Returns list of comments respective to post id</returns>
+    public async Task<List<Comment>> GetAllCommentsAsync(int postId)
+    {
+        return await _context.Comments.AsNoTracking().ToListAsync();
+    }
+    /// <summary>
+    ///     Author: Jose
+    ///     Context: Updates the comment (likes, entry)
+    /// </summary>
+    /// <param name="commentToUpdate"></param>
+    /// <returns>Returns the updated comment</returns>
+    public async Task<Comment> UpdateCommentAsync(Comment commentToUpdate)
+    {
+        _context.Comments.Update(commentToUpdate);
+        await _context.SaveChangesAsync();
+        _context.ChangeTracker.Clear();
+        return await _context.Comments.FirstOrDefaultAsync(comment => comment.id == commentToUpdate.id);
     }
 
 
