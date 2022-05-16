@@ -59,7 +59,7 @@ public class PostController : ControllerBase
         await _db.postForBandAsync(bandId, textEntry);
     }
 
-    [HttpPost("PostForUser/{user}/{textEntry")]
+    [HttpPost("PostForUser/{user}/{textEntry}")]
     public async Task postForUser(User user, string textEntry)
     {
         await _db.postForUserAsync(user, textEntry);
