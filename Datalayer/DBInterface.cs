@@ -60,6 +60,34 @@ namespace Datalayer
         /// </summary>
         Task likePostAsync(int postId, User user);
 
+        /// <summary>
+        ///     Author: Jose
+        ///     Context: Creates comment in database
+        /// </summary>
+        /// <param name="commentToAdd"></param>
+        /// <returns></returns>
+        Task AddCommentAsync(Comment commentToAdd);
+        /// <summary>
+        ///     Author: Jose
+        ///     Context: Gets comment by comment id from database
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns>Returns comment respective to the id</returns>
+        Task<Comment> GetCommentAsync(int commentId);
+        /// <summary>
+        ///     Author: Jose
+        ///     Context: Gets all comments from post id from database
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns>Returns list of comments respective to post id</returns>
+        Task<List<Comment>> GetAllCommentsAsync(int postId);
+        /// <summary>
+        ///     Author: Jose
+        ///     Context: Updates the comment (likes, entry)
+        /// </summary>
+        /// <param name="commentToUpdate"></param>
+        /// <returns>Returns the updated comment</returns>
+        Task<Comment> UpdateCommentAsync(Comment commentToUpdate);
 
         //Group/Team things
         /// <summary>

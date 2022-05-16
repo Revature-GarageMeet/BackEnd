@@ -30,7 +30,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet("GetAllComments/{postId}")]
-    public async Task<List<Comment>> Get(int postId)
+    public async Task<List<Comment>> GetAll(int postId)
     {
         return await _dl.GetAllCommentsAsync(postId);
     }
