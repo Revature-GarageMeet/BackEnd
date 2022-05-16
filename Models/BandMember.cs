@@ -34,4 +34,5 @@ namespace Models
     user id
     band id
     date datejoined
+    ~Leo
 */

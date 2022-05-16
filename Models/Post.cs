@@ -38,6 +38,11 @@ namespace Models
         /// </summary>
         /// <value>Type of Post</value>
         public Boolean type { get; set; }
+        ///<summary>
+        ///Holds comments tied to the post
+        ///</summary>
+        /// <value>List of comments</value>
+        public List<Comment> postComments {get; set;}
     }
 }
 
@@ -48,5 +53,6 @@ namespace Models
     int likes
     date datecreated
     int bandid 
-    type type //post based on band/user posts (use bool for it or maybe int for id type)  ~leo
+    Boolean type (use bool for it or maybe int for id type)  
+    ~leo
 */

@@ -19,6 +19,11 @@ namespace Models
         /// </summary>
         /// <value>Band's Description</value>
         public string description {get;set;} = "";
+        /// <summary>
+        /// Max number of Members in Band
+        /// </summary>
+        /// <value>Max number of Members in Band</value>
+        public int memberLimit { get; set; }
     }
 }
 
@@ -26,4 +31,6 @@ namespace Models
     int id
     string title
     string description
+    int memberLimit
+    ~Leo
 */
