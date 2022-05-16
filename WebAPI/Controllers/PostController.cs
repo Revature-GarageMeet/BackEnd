@@ -17,8 +17,8 @@ using Models;
 
 
 namespace WebAPI.Controllers;
-[ApiController]
 [Route("[controller]")]
+[ApiController]
 public class PostController : ControllerBase
 {
     private readonly DBInterface _db;
@@ -39,13 +39,13 @@ public class PostController : ControllerBase
     /// <summary>
     /// Gets All the posts by a specific user by user object.
     /// </summary>
-    /// /// <param name="user">User object to find posts for.</param>
+    /// <param name="user">User object to find posts for.</param>
     /// <returns>A List of Posts of all the posts by a specific user.</returns>
     public async Task<List<Post>> GetPostsByUser(User user)
     {
         return await _db.GetPostsByUserAsync(user);
     }
-    
+
     [HttpGet("GetPostByBandID/{bandId}")]
     public async Task<List<Post>> getPostbyBandID(int bandId)
     {
@@ -64,7 +64,7 @@ public class PostController : ControllerBase
     {
         await _db.postForUserAsync(user, textEntry);
     }
-    
+
     [HttpPost("PostForUserId/{userId}/{textEntry}")]
     public async Task postForUserId(int userId, string textEntry)
     {
