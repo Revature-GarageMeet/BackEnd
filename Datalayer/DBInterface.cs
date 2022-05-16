@@ -60,6 +60,7 @@ namespace Datalayer
         /// </summary>
         Task likePostAsync(int postId, User user);
 
+        Task deletePostAsync(int postId);
         /// <summary>
         ///     Author: Jose
         ///     Context: Creates comment in database

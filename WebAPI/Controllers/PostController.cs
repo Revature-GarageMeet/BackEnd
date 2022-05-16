@@ -28,7 +28,7 @@ public class PostController : ControllerBase
     }
 
 
-    [HttpGet("GetPostbyUID/{userID}")]
+    [HttpGet("GetPostbyUID/{userId}")]
     public async Task<List<Post>> getPostbyUserID(int userId)
     {
         return await _db.getPostbyUserIdAsync(userId);
@@ -41,7 +41,7 @@ public class PostController : ControllerBase
     /// </summary>
     /// <param name="user">User object to find posts for.</param>
     /// <returns>A List of Posts of all the posts by a specific user.</returns>
-    public async Task<List<Post>> GetPostsByUser(User user)
+    public async Task<List<Post>> GetPostsByUser([FromQuery] User user)
     {
         return await _db.GetPostsByUserAsync(user);
     }
@@ -75,6 +75,12 @@ public class PostController : ControllerBase
     public async Task likePost(int postId, User user)
     {
         await _db.likePostAsync(postId, user);
+    }
+
+    [HttpDelete("DeletePost/{postId}")]
+    public async Task Delete(int postId)
+    {
+        await _db.deletePostAsync(postId);
     }
 }
 /*
