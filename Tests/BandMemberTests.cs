@@ -88,22 +88,22 @@ public class BandMemberTests
         mock.Verify(p => p.RemoveBandMember(deleteBandMem));
     }
 
-    // [Fact]
-    // public async Task CreateBandMember_DBMethodRecordExists()
-    // {
-    //     // Test a new BandMember record was added to Azure Database ~Bailey
-    // }
+    [Fact]
+    public async Task CreateBandMember_DBMethodRecordExists()
+    {
+        // Test a new BandMember record was added to Azure Database ~Bailey
+    }
 
-    // [Fact]
-    // public async Task GetAllBandMembers_DBMethodSpecificRecordsExists()
-    // {
-    //     // Test all members for a specific Band group are acquired ~Bailey
-    // }
+    [Fact]
+    public async Task GetAllBandMembers_DBMethodSpecificRecordsExists()
+    {
+        // Test all members for a specific Band group are acquired ~Bailey
+    }
 
-    // [Fact]
-    // public async Task DeleteBandMember_DBMethodRecordDoesNotExist()
-    // {
-    //     // Test that a band member no longer exists in the Azure Database ~Bailey
-    // }
+    [Fact]
+    public async Task DeleteBandMember_DBMethodRecordDoesNotExist()
+    {
+        // Test that a band member no longer exists in the Azure Database ~Bailey
+    }
 
 }
