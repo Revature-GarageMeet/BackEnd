@@ -74,14 +74,15 @@ public class PostsTests
         Post post = new Post();
         post.type = true;
 
-        Assert.Equal(true, post.type);
+        Assert.True(post.type);
     }
 
     [Fact]
     public void GetSetPostComments()
     {
         Comment comment = new Comment();
-        Post postComments = new List<Comment>(comment);
+        List<Comment> postComments = new List<Comment>();
+        postComments.Add(comment);
 
         Assert.Equal(comment, postComments[0]);
     }
@@ -92,26 +93,29 @@ public class PostsTests
     {
         int testBandId = 4;
         DateTime date = DateTime.UtcNow;
-        Post testPost = new Post
+        List<Post> testPost = new List<Post>
         {
-            id = 1,
-            entry = "",
-            userId = 2,
-            likes = 3,
-            dateCreated = date,
-            bandId = 4,
-            type = true
+            new Post
+            {
+                id = 1,
+                entry = "",
+                userId = 2,
+                likes = 3,
+                dateCreated = date,
+                bandId = 4,
+                type = true
+            }
         };
 
-        mock.Setup(dl => dl.getPostByBandID(testBandId)).ReturnsAsync(testPost);
+        mock.Setup(dl => dl.getPostbyBandIdAsync(testBandId)).ReturnsAsync(testPost);
 
         PostController mockPost = new PostController(mock.Object);
 
-        Post post = await mockPost.Get(testBandId);
+        List<Post> post = await mockPost.getPostbyBandID(testBandId);
 
         Assert.Equal(testPost, post);
 
-        mock.Verify(dl => dl.getPostByBandID(testBandId), TimeSpan.Once());
+        mock.Verify(dl => dl.getPostbyBandIdAsync(testBandId));
     }
 
     [Fact]
@@ -119,25 +123,28 @@ public class PostsTests
     {
         int testUserId = 4;
         DateTime date = DateTime.UtcNow;
-        Post testPost = new Post
+        List<Post> testPost = new List<Post>
         {
-            id = 1,
-            entry = "",
-            userId = 4,
-            likes = 2,
-            dateCreated = date,
-            bandId = 3,
-            type = true
+            new Post
+            {
+                id = 1,
+                entry = "",
+                userId = 4,
+                likes = 2,
+                dateCreated = date,
+                bandId = 3,
+                type = true
+            }
         };
 
-        mock.Setup(dl => dl.getPostbyUserId(testUserId).ReturnsAsync(testPost));
+        mock.Setup(dl => dl.getPostbyUserIdAsync(testUserId)).ReturnsAsync(testPost);
 
         PostController mockPost = new PostController(mock.Object);
 
-        Post post = await mockPost.Get(testUserId);
+        List<Post> post = await mockPost.getPostbyUserID(testUserId);
 
         Assert.Equal(testPost, post);
 
-        mock.Verify(dl => dl.getPostbyUserID(testUserId), TimeSpan.Once());
+        mock.Verify(dl => dl.getPostbyUserIdAsync(testUserId));
     }
 }
