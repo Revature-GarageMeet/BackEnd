@@ -22,6 +22,7 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
+        Task<User> updateUser(User user);
         Task<Boolean> checkExisting(User user);
         /// <summary>
         /// Returns if username and password match
@@ -29,6 +30,7 @@ namespace Datalayer
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
         Task<Boolean> authenticateUser(User user);
+
 
         //************************************************ Post Related things ************************************************ 
         /// <summary>
