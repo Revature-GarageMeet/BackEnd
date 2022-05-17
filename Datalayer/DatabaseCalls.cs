@@ -164,7 +164,7 @@ public class DatabaseCalls : DBInterface
     /// <returns>Returns list of comments respective to post id</returns>
     public async Task<List<Comment>> GetAllCommentsAsync(int postId)
     {
-        return await _context.Comments.AsNoTracking().ToListAsync();
+        return await _context.Comments.AsNoTracking().Where(comment => comment.postId == postId).ToListAsync();
     }
     /// <summary>
     ///     Author: Jose
