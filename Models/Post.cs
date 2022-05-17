@@ -42,7 +42,7 @@ namespace Models
         ///Holds comments tied to the post
         ///</summary>
         /// <value>List of comments</value>
-        public List<Comment> postComments {get; set;}
+        public List<Comment> postComments {get; set;} 
     }
 }
 

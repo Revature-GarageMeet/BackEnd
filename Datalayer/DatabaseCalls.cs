@@ -57,13 +57,9 @@ public class DatabaseCalls : DBInterface
     //************************************************ Post Related Things ************************************************
     public async Task<List<Post>> GetPostsByUserAsync(User user)
     {
-        List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
-        List<Post> userx = new List<Post>();
-        foreach (Post p in temp)
-        {
-            userx.Add(await _context.Posts.FirstOrDefaultAsync(user => user.id == p.id));
-        }
-        return userx;
+        // List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
+        // return temp;
+        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
     }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
@@ -99,8 +95,11 @@ public class DatabaseCalls : DBInterface
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        temp.likes++;
-        _context.Posts.Update(temp);
+        if(temp != null)
+        {
+            temp.likes++;
+            _context.Posts.Update(temp);
+        }
         //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
         await _context.SaveChangesAsync();
     }
@@ -109,11 +108,10 @@ public class DatabaseCalls : DBInterface
     {   
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
         Post temp = await _context.Posts.FirstOrDefaultAsync(t=> t.id == postId);
-        /*if(temp == null)
+        if(temp != null)
         {
-            return Task.CompletedTask;
-        }*/
         _context.Posts.Remove(temp);
+        }
         await _context.SaveChangesAsync();
     }
 

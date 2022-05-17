@@ -109,6 +109,5 @@ namespace Datalayer
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
         Task RemoveBandMember(BandMember memberToDelete);
 
-        //Post Related things
     }
 }
