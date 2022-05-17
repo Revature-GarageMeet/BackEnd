@@ -17,33 +17,13 @@ public class DatabaseCalls : DBInterface
     //User Login/Registration things
     public async Task<User> createUser(User user)
     {
-        if (await checkExisting(user))
-        {
-            //User Already Exists, throw an exception or something
-            //THIS NEEDS TO BE DONE STILL
-            return user;
-        }
-        else
-        {
-            //prob need to add other default values to user still
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
-        }
-
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
     public async Task<User> loginUser(User auth)
     {
-        if (await authenticateUser(auth))
-        {
-            //If username and password match then give the user back
-            return await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username && user.password == auth.password);
-        }
-        else
-        {
-            //if fail then throw an exception or something
-            return auth;
-        }
+        return await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username && user.password == auth.password);
     }
     public async Task<Boolean> checkExisting(User auth)
     {
@@ -52,6 +32,19 @@ public class DatabaseCalls : DBInterface
     public async Task<Boolean> authenticateUser(User auth)
     {
         return await _context.Users.AnyAsync(user => user.username == auth.username && user.password == auth.password);
+    }
+
+    public async Task<User> updateUser(User auth)
+    {
+        User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
+        Console.WriteLine(temp.bio);
+        temp.firstname = auth.firstname;
+        temp.lastname = auth.lastname;
+        temp.bio = auth.bio;
+        await _context.SaveChangesAsync();
+
+        Console.WriteLine(auth.bio);
+        return temp;
     }
 
     //************************************************ Post Related Things ************************************************
@@ -91,7 +84,7 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task likePostAsync(int postId, User user) 
+    public async Task likePostAsync(int postId, User user)
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
@@ -105,7 +98,7 @@ public class DatabaseCalls : DBInterface
     }
 
     public async Task deletePostAsync(int postId)
-    {   
+    {
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
         Post temp = await _context.Posts.FirstOrDefaultAsync(t=> t.id == postId);
         if(temp != null)
