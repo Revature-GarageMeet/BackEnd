@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(GMDBContext))]
-    [Migration("20220512194928_initial")]
+    [Migration("20220517152933_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,8 @@ namespace Datalayer.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("postId");
+
                     b.ToTable("Comments");
                 });
 
@@ -120,8 +122,9 @@ namespace Datalayer.Migrations
                     b.Property<int>("likes")
                         .HasColumnType("int");
 
-                    b.Property<bool>("type")
-                        .HasColumnType("bit");
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("userId")
                         .HasColumnType("int");
@@ -166,6 +169,20 @@ namespace Datalayer.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Models.Comment", b =>
+                {
+                    b.HasOne("Models.Post", null)
+                        .WithMany("postComments")
+                        .HasForeignKey("postId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Post", b =>
+                {
+                    b.Navigation("postComments");
                 });
 #pragma warning restore 612, 618
         }

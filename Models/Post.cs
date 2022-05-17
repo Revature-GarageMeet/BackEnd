@@ -37,7 +37,7 @@ namespace Models
         /// Type of Post, True for x, False for y
         /// </summary>
         /// <value>Type of Post</value>
-        public Boolean type { get; set; }
+        public string type { get; set; } = "";
         ///<summary>
         ///Holds comments tied to the post
         ///</summary>

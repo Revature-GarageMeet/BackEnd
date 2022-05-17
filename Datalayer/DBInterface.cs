@@ -10,13 +10,13 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to Create</param>
         /// <returns>User Created</returns>
-        Task<User> createUser(User user);
+        Task<User> createUser(string userName, string userPass, string email);
         /// <summary>
         /// Logs in a user, uses authenticateUser to check if matching, throws an exception if it isn't found
         /// </summary>
         /// <param name="user">User to Login</param>
         /// <returns>User Logged In</returns>
-        Task<User> loginUser(User user);
+        Task<User> loginUser(string authUser, string authPass);
         /// <summary>
         /// Returns if the username is already taken
         /// </summary>
@@ -46,15 +46,15 @@ namespace Datalayer
         /// <summary>
         /// Posts for a band's Id
         /// </summary>
-        Task postForBandAsync(int bandId, string textEntry);
+        Task postForBandAsync(int bandId, string textEntry, string postType);
         /// <summary>
         /// Posts for a user
         /// </summary>
-        Task postForUserAsync(User user, string textEntry);
+        Task postForUserAsync(User user, string textEntry, string postType);
         /// <summary>
         /// Posts for a user's Id
         /// </summary>
-        Task postForUserIdAsync(int userId, string textEntry);
+        Task postForUserIdAsync(int userId, string textEntry, string postType);
         /// <summary>
         /// Like post, not sure how this should really be done - maybe we really do need a like table????
         /// </summary>
