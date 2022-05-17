@@ -8,31 +8,33 @@ namespace WebAPI.Controllers;
 [ApiController]
 public class BandMemberController : ControllerBase
 {
-   private readonly DBInterface _dl;
+    private readonly DBInterface _dl;
 
-   public BandMemberController(DBInterface dl)
-   {
-       _dl = dl;
-   }
+    public BandMemberController(DBInterface dl)
+    {
+        _dl = dl;
+    }
 
-   // Gets all band members for a Single band ~Bailey
-   [HttpGet]
-   public async Task<List<BandMember>> GetAll(int bandId)
-   {
-       return await _dl.GetAllBandMembers(bandId);
-   }
+    // Gets all band member records for a Single band ~Bailey
+    [HttpGet("GetAllBandMembers/{bandId}")]
+    public async Task<List<BandMember>> GetAll(int bandId)
+    {
+        return await _dl.GetAllBandMembers(bandId);
+    }
 
-   [HttpPost]
-   public async Task<BandMember> Post(BandMember newMember)
-   {
-       newMember.dateJoined = DateTime.UtcNow;
-       return await _dl.CreateBandMember(newMember);
-   }
+    // Adds a new band member record to the Database
+    [HttpPost("AddBandMember")]
+    public async Task<BandMember> Post(BandMember newMember)
+    {
+        newMember.dateJoined = DateTime.UtcNow;
+        return await _dl.CreateBandMember(newMember);
+    }
 
-   [HttpDelete]
-   public async Task Delete(BandMember memberToDelete)
-   {
-       await _dl.RemoveBandMember(memberToDelete);
-   }
+    // Removes a band member record from the database
+    [HttpDelete("RemoveBandMember")]
+    public async Task Delete(BandMember memberToDelete)
+    {
+        await _dl.RemoveBandMember(memberToDelete);
+    }
 
 }
