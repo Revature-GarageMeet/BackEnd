@@ -40,23 +40,6 @@ namespace Datalayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<int>(type: "int", nullable: false),
-                    postId = table.Column<int>(type: "int", nullable: false),
-                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    likes = table.Column<int>(type: "int", nullable: false),
-                    dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -67,7 +50,7 @@ namespace Datalayer.Migrations
                     likes = table.Column<int>(type: "int", nullable: false),
                     dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     bandId = table.Column<int>(type: "int", nullable: false),
-                    type = table.Column<bool>(type: "bit", nullable: false)
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,6 +74,34 @@ namespace Datalayer.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    postId = table.Column<int>(type: "int", nullable: false),
+                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    likes = table.Column<int>(type: "int", nullable: false),
+                    dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Posts_postId",
+                        column: x => x.postId,
+                        principalTable: "Posts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_postId",
+                table: "Comments",
+                column: "postId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -105,10 +116,10 @@ namespace Datalayer.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Posts");
         }
     }
 }

@@ -15,23 +15,50 @@ public class DatabaseCalls : DBInterface
 
 
     //User Login/Registration things
-    public async Task<User> createUser(User user)
+    public async Task<User> createUser(string userName, string userPass, string email)
     {
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-        return user;
+        
+        if (await checkExisting(userName))
+        {
+            //User Already Exists, throw an exception or something
+            //THIS NEEDS TO BE DONE STILL
+            return new User();
+        }
+        else
+        {
+            User newUser = new User()
+            {
+                username = userName,
+                password = userPass,
+                email = email
+            };
+            //prob need to add other default values to user still
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+            return newUser;
+        }
+
     }
-    public async Task<User> loginUser(User auth)
+    public async Task<User> loginUser(string authUser, string authPass)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username && user.password == auth.password);
+        if (await authenticateUser(authUser, authPass))
+        {
+            //If username and password match then give the user back
+            return await _context.Users.FirstOrDefaultAsync(user => user.username == authUser && user.password == authPass);
+        }
+        else
+        {
+            //if fail then throw an exception or something
+            return new User();
+        }
     }
-    public async Task<Boolean> checkExisting(User auth)
+    public async Task<Boolean> checkExisting(string authName)
     {
-        return await _context.Users.AnyAsync(user => user.username == auth.username);
+        return await _context.Users.AnyAsync(user => user.username == authName);
     }
-    public async Task<Boolean> authenticateUser(User auth)
+    public async Task<Boolean> authenticateUser(string authUser, string authPass)
     {
-        return await _context.Users.AnyAsync(user => user.username == auth.username && user.password == auth.password);
+        return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
     }
 
     public async Task<User> updateUser(User auth)
@@ -64,22 +91,22 @@ public class DatabaseCalls : DBInterface
         return await _context.Posts.AsNoTracking().Where(post => post.bandId == bandId).ToListAsync();
     }
 
-    public async Task postForBandAsync(int bandId, string textEntry)
+    public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {
-        Post post = new Post() { entry = textEntry, bandId = bandId };
+        Post post = new Post() { entry = textEntry, bandId = bandId, type = postType };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
 
-    public async Task postForUserAsync(User user, string textEntry)
+    public async Task postForUserAsync(User user, string textEntry, string postType)
     {
-        Post post = new Post() { entry = textEntry, userId = user.id, likes = 0, dateCreated = DateTime.Now };
+        Post post = new Post() { entry = textEntry, userId = user.id, likes = 0, dateCreated = DateTime.Now, type = postType };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
-    public async Task postForUserIdAsync(int userId, string textEntry)
+    public async Task postForUserIdAsync(int userId, string textEntry, string postType)
     {
-        Post post = new Post() { entry = textEntry, userId = userId, likes = 0, dateCreated = DateTime.Now };
+        Post post = new Post() { entry = textEntry, userId = userId, likes = 0, dateCreated = DateTime.Now, type = postType };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
@@ -175,6 +202,16 @@ public class DatabaseCalls : DBInterface
     {
         _context.BandMembers.Remove(memberToDelete);
         await _context.SaveChangesAsync();
+    }
+
+    public Task<bool> authenticateUser(User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> checkExisting(User user)
+    {
+        throw new NotImplementedException();
     }
 }
 
