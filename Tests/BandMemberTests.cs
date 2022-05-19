@@ -89,6 +89,43 @@ public class BandMemberTests
     }
 
     [Fact]
+    public void GetSetBandMemberId()
+    {
+        BandMember newBandMem = new BandMember();
+        newBandMem.id = 1;
+
+        Assert.Equal(1, newBandMem.id);
+    }
+
+    [Fact]
+    public void GetSetBandMemberBandId()
+    {
+        BandMember newBandMem = new BandMember();
+        newBandMem.bandId = 2;
+
+        Assert.Equal(2, newBandMem.bandId);
+    }
+
+    [Fact]
+    public void GetSetBandMemberUserId()
+    {
+        BandMember newBandMem = new BandMember();
+        newBandMem.userId = 1;
+
+        Assert.Equal(1, newBandMem.userId);
+    }
+
+    [Fact]
+    public void GetSetBandMemberDateJoined()
+    {
+        BandMember newBandMem = new BandMember();
+        DateTime dateCheck = DateTime.UtcNow;
+        newBandMem.dateJoined = dateCheck;
+        
+        Assert.Equal(dateCheck, newBandMem.dateJoined);
+    }
+
+    [Fact]
     public async Task CreateBandMember_DBMethodRecordExists()
     {
         // Test a new BandMember record was added to Azure Database ~Bailey
