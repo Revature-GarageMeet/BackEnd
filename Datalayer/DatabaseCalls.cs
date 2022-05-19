@@ -183,11 +183,32 @@ public class DatabaseCalls : DBInterface
 
     //Group/Team things
 
+    //Band calls -Arrion
+    public async Task<Band> CreateBand(Band newBand)
+    {
+        _context.Bands.Add(newBand);
+        await _context.SaveChangesAsync();
+        return newBand;
+    }
+
+    public async Task<List<Band>> GetBands(int bandId)
+    {
+        return await _context.Bands.FromSqlRaw($"Select * From Band Where Bands.bandId = {bandId}").ToListAsync();
+    }
+
+    public async Task DeleteBand(Band bandToDelete)
+    {
+        _context.Bands.Remove(bandToDelete);
+        await _context.SaveChangesAsync();
+    }
+
     // Gets all members for a single Band ~Bailey
     public async Task<List<BandMember>> GetAllBandMembers(int bandId)
     {
         return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
     }
+
+    //Note to me(Arrion) don't forget band limit
 
     // Adds new member to database ~Bailey
     public async Task<BandMember> CreateBandMember(BandMember newMember)

@@ -2,27 +2,26 @@ using Datalayer;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore;
+using Microsoft.OpenApi.Models;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Host.UseSerilog(
-//     (ctx, lc) => lc
-//     .WriteTo.Console()
-//     .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
-// );
-
-
+builder.Host.UseSerilog(
+    (ctx, lc) => lc
+    .WriteTo.Console()
+    .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
+);
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
-                        {
-                            policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876")
+                      {
+                          policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowAnyOrigin();
-                        });
+                      });
 });
 
 // Add services to the container.
@@ -50,7 +49,6 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
-// app.MapControllers();
-
 app.MapControllers();
+
 app.Run();

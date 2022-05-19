@@ -93,11 +93,27 @@ namespace Datalayer
         Task<Comment> UpdateCommentAsync(Comment commentToUpdate);
 
         //Group/Team things
+        //Should we differentiate b/t bandId and bandmemberId? -Arrion
+        Task<Band> CreateBand(Band newBand);
         /// <summary>
-        /// Gets all band members for a single Band group/team ~Bailey
+        /// Creates new band
         /// </summary>
-        /// <param name="bandId">Integer value to be used to find certain records in database</param>
-        /// <returns>A list of individual BandMember objects</returns>
+      
+        Task<List<Band>> GetBands(int bandId);
+        /// <summary>
+        /// Gets all created bands
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns>A list of band names </return>
+       
+        Task DeleteBand(int bandId);
+        /// <summary>
+        /// Deletes a band
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns></returns>
+
+
         Task<List<BandMember>> GetAllBandMembers(int bandId);
         /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
