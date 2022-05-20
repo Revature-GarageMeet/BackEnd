@@ -95,7 +95,7 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task likePostAsync(int postId, User user) 
+    public async Task likePostAsync(int postId, User user)
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
@@ -106,9 +106,9 @@ public class DatabaseCalls : DBInterface
     }
 
     public async Task deletePostAsync(int postId)
-    {   
+    {
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t=> t.id == postId);
+        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
         /*if(temp == null)
         {
             return Task.CompletedTask;
@@ -146,7 +146,7 @@ public class DatabaseCalls : DBInterface
     /// <returns>Returns list of comments respective to post id</returns>
     public async Task<List<Comment>> GetAllCommentsAsync(int postId)
     {
-        return await _context.Comments.AsNoTracking().ToListAsync();
+        return await _context.Comments.AsNoTracking().Where(comment => comment.postId == postId).ToListAsync();
     }
     /// <summary>
     ///     Author: Jose

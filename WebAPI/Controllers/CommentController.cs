@@ -35,7 +35,7 @@ public class CommentController : ControllerBase
         return await _dl.GetAllCommentsAsync(postId);
     }
 
-    [HttpGet("UpdateComment")]
+    [HttpPut("UpdateComment")]
     public async Task<Comment> Put(Comment commentToUpdate)
     {
         return await _dl.UpdateCommentAsync(commentToUpdate);
