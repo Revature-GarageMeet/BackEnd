@@ -17,9 +17,10 @@ public class CommentController : ControllerBase
         _dl = dl;
     }
 
-    [HttpPost("AddComment")]
-    public async Task Post(Comment commentToAdd)
+    [HttpPost("AddComment/{postIdee}")] // to avoid name confusion, idee is for the passed in post id
+    public async Task Post(Comment commentToAdd, int postIdee)
     {
+        commentToAdd.postId = postIdee;
         await _dl.AddCommentAsync(commentToAdd);
     }
 

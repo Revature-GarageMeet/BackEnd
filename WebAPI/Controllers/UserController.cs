@@ -11,15 +11,15 @@ public class UserController : ControllerBase
    {
        _db = db;
    }
-   [HttpGet]
-   public async Task<User> login(User user)
+   [HttpGet("UserLogin/{username}/{password}")]
+   public async Task<User> login(string username, string password)
    {
-       return await _db.loginUser(user);
+       return await _db.loginUser(username, password);
    }
-   [HttpPost]
-   public async Task<User> createUser(User user)
+   [HttpPost("Create/{username}/{password}/{email}")]
+   public async Task<User> createUser(string username, string password, string email)
    {
-       return await _db.createUser(user);
+       return await _db.createUser(username, password, email);
    }
 }
 /*

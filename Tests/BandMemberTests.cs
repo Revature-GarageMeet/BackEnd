@@ -84,7 +84,7 @@ public class BandMemberTests
 
         mock.Setup(p => p.RemoveBandMember(deleteBandMem));
         BandMemberController bandMem = new BandMemberController(mock.Object);
-        bandMem.Delete(deleteBandMem);
+        await bandMem.Delete(deleteBandMem);
         mock.Verify(p => p.RemoveBandMember(deleteBandMem));
     }
 
