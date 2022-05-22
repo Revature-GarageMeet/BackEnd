@@ -201,6 +201,10 @@ public class DatabaseCalls : DBInterface
         _context.Bands.Remove(bandToDelete);
         await _context.SaveChangesAsync();
     }
+    public async Task DeleteBand(int bandId)
+    {
+        await _context.SaveChangesAsync();
+    }
 
     // Gets all members for a single Band ~Bailey
     public async Task<List<BandMember>> GetAllBandMembers(int bandId)
@@ -223,6 +227,11 @@ public class DatabaseCalls : DBInterface
     {
         _context.BandMembers.Remove(memberToDelete);
         await _context.SaveChangesAsync();
+    }
+    // not implemented
+    public async Task<List<string>> GetAllBandNames(int bandId){
+        await _context.SaveChangesAsync();
+        return new List<string>();
     }
 
     public Task<bool> authenticateUser(User user)

@@ -126,6 +126,11 @@ namespace Datalayer
         /// </summary>
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
         Task RemoveBandMember(BandMember memberToDelete);
-
+        /// <summary>
+        /// Gets a list of band names
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns></returns>
+        Task<List<string>> GetAllBandNames(int bandId);
     }
 }

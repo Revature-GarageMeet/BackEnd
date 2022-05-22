@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         }
         // Gets Band Name
         [HttpGet]
-        public async Task<List<BandName>> GetAll(int bandId)
+        public async Task<List<string>> GetAll(int bandId)
         {
             return await _db.GetAllBandNames(bandId);
         }
