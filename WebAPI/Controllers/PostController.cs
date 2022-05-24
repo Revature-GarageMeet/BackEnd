@@ -52,23 +52,24 @@ public class PostController : ControllerBase
         return await _db.getPostbyBandIdAsync(bandId);
     }
 
-    [HttpPost("PostForBand/{bandId}/{textEntry}")]
-    public async Task postForBand(int bandId, string textEntry)
+    [HttpPost("PostForBand/{bandId}/{textEntry}/{postType}")]
+    public async Task postForBand(int bandId, string textEntry, string postType)
     {
         // We could specify the user later
-        await _db.postForBandAsync(bandId, textEntry);
+        await _db.postForBandAsync(bandId, textEntry, postType);
     }
 
-    [HttpPost("PostForUser/{user}/{textEntry}")]
-    public async Task postForUser(User user, string textEntry)
-    {
-        await _db.postForUserAsync(user, textEntry);
-    }
+    //NOT NEEDED SINCE PostForUserID already gets user --Tucker
+    // [HttpPost("PostForUser/{user}/{textEntry}/{postType}")]
+    // public async Task postForUser(User user, string textEntry, string postType)
+    // {
+    //     await _db.postForUserAsync(user, textEntry, postType);
+    // }
 
-    [HttpPost("PostForUserId/{userId}/{textEntry}")]
-    public async Task postForUserId(int userId, string textEntry)
+    [HttpPost("PostForUserId/{userId}/{textEntry}/{postType}")]
+    public async Task postForUserId(int userId, string textEntry, string postType)
     {
-        await _db.postForUserIdAsync(userId, textEntry);
+        await _db.postForUserIdAsync(userId, textEntry, postType);
     }
 
     [HttpPut("LikePost/{postId}/{user}")]

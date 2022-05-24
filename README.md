@@ -12,3 +12,5 @@ git rm -r --cached appsettings.json
 git rm -r --cached appsettings.Development.json
 git commit -m "Removed appsettings to hide our super secret password to db"
 git push origin Leo
+
+This is here to test continuous deployment on a merged pull request

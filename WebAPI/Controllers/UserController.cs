@@ -42,8 +42,8 @@ public class UserController : ControllerBase
     }
 }
 /*
-    post createuser
-    get login
-    both methods pass into the DatabaseCalls.cs methods and return the user created/logged in
-    ~leo
+   post createuser
+   get login
+   both methods pass into the DatabaseCalls.cs methods and return the user created/logged in
+   ~leo
 */
