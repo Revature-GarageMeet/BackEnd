@@ -15,29 +15,11 @@ public class DatabaseCalls : DBInterface
 
 
     //User Login/Registration things
-    public async Task<User> createUser(string userName, string userPass, string email)
+    public async Task<User> createUser(User user)
     {
-        
-        if (await checkExisting(userName))
-        {
-            //User Already Exists, throw an exception or something
-            //THIS NEEDS TO BE DONE STILL
-            return new User();
-        }
-        else
-        {
-            User newUser = new User()
-            {
-                username = userName,
-                password = userPass,
-                email = email
-            };
-            //prob need to add other default values to user still
-            _context.Users.Add(newUser);
-            await _context.SaveChangesAsync();
-            return newUser;
-        }
-
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
     public async Task<User> loginUser(string auth)
     {
@@ -106,7 +88,7 @@ public class DatabaseCalls : DBInterface
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        if(temp != null)
+        if (temp != null)
         {
             temp.likes++;
             _context.Posts.Update(temp);
@@ -118,10 +100,10 @@ public class DatabaseCalls : DBInterface
     public async Task deletePostAsync(int postId)
     {
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t=> t.id == postId);
-        if(temp != null)
+        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        if (temp != null)
         {
-        _context.Posts.Remove(temp);
+            _context.Posts.Remove(temp);
         }
         await _context.SaveChangesAsync();
     }
@@ -220,7 +202,8 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
     // not implemented
-    public async Task<List<string>> GetAllBandNames(int bandId){
+    public async Task<List<string>> GetAllBandNames(int bandId)
+    {
         await _context.SaveChangesAsync();
         return new List<string>();
     }

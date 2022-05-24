@@ -10,7 +10,7 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to Create</param>
         /// <returns>User Created</returns>
-        Task<User> createUser(string userName, string userPass, string email);
+        Task<User> createUser(User user);
         /// <summary>
         /// Logs in a user, uses authenticateUser to check if matching, throws an exception if it isn't found
         /// </summary>
@@ -98,14 +98,14 @@ namespace Datalayer
         /// <summary>
         /// Creates new band
         /// </summary>
-      
+
         Task<List<Band>> GetBands(int bandId);
         /// <summary>
         /// Gets all created bands
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns>A list of band names </return>
-       
+
         Task DeleteBand(int bandId);
         /// <summary>
         /// Deletes a band
