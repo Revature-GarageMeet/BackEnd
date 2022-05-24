@@ -16,14 +16,14 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to Login</param>
         /// <returns>User Logged In</returns>
-        Task<User> loginUser(User user);
+        Task<User> loginUser(string user);
         /// <summary>
         /// Returns if the username is already taken
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
         Task<User> updateUser(User user);
-        Task<Boolean> checkExisting(User user);
+        Task<Boolean> checkExisting(string username);
         /// <summary>
         /// Returns if username and password match
         /// </summary>

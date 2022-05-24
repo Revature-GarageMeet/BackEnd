@@ -21,13 +21,13 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
         return user;
     }
-    public async Task<User> loginUser(User auth)
+    public async Task<User> loginUser(string auth)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username && user.password == auth.password);
+        return await _context.Users.FirstOrDefaultAsync(user => user.username == auth);
     }
-    public async Task<Boolean> checkExisting(User auth)
+    public async Task<Boolean> checkExisting(string auth)
     {
-        return await _context.Users.AnyAsync(user => user.username == auth.username);
+        return await _context.Users.AnyAsync(user => user.username == auth);
     }
     public async Task<Boolean> authenticateUser(User auth)
     {

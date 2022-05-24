@@ -11,8 +11,8 @@ public class UserController : ControllerBase
     {
         _db = db;
     }
-    [HttpGet]
-    public async Task<User> login(User user)
+    [HttpGet("Login/{user}")]
+    public async Task<User> login(string user)
     {
         return await _db.loginUser(user);
     }
@@ -23,10 +23,10 @@ public class UserController : ControllerBase
         return await _db.authenticateUser(user);
     }
 
-    [HttpGet("Existing")]
-    public async Task<Boolean> existing(User user)
+    [HttpGet("Existing/{username}")]
+    public async Task<Boolean> existing(string username)
     {
-        return await _db.checkExisting(user);
+        return await _db.checkExisting(username);
     }
 
     [HttpPost]
