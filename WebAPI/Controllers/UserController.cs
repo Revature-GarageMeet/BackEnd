@@ -6,21 +6,40 @@ namespace WebAPI.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-   private readonly DBInterface _db;
-   public UserController(DBInterface db)
-   {
-       _db = db;
-   }
-   [HttpGet("UserLogin/{username}/{password}")]
-   public async Task<User> login(string username, string password)
-   {
-       return await _db.loginUser(username, password);
-   }
-   [HttpPost("Create/{username}/{password}/{email}")]
-   public async Task<User> createUser(string username, string password, string email)
-   {
-       return await _db.createUser(username, password, email);
-   }
+    private readonly DBInterface _db;
+    public UserController(DBInterface db)
+    {
+        _db = db;
+    }
+    [HttpGet("Login/{user}")]
+    public async Task<User> login(string user)
+    {
+        return await _db.loginUser(user);
+    }
+
+    [HttpGet("Authenticate")]
+    public async Task<Boolean> authenticate(User user)
+    {
+        return await _db.authenticateUser(user);
+    }
+
+    [HttpGet("Existing/{username}")]
+    public async Task<Boolean> existing(string username)
+    {
+        return await _db.checkExisting(username);
+    }
+
+    [HttpPost]
+    public async Task<User> createUser(User user)
+    {
+        return await _db.createUser(user);
+    }
+
+    [HttpPut]
+    public async Task<User> updateUser(User user)
+    {
+        return await _db.updateUser(user);
+    }
 }
 /*
    post createuser

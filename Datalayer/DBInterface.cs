@@ -10,20 +10,20 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to Create</param>
         /// <returns>User Created</returns>
-        Task<User> createUser(string userName, string userPass, string email);
+        Task<User> createUser(User user);
         /// <summary>
         /// Logs in a user, uses authenticateUser to check if matching, throws an exception if it isn't found
         /// </summary>
         /// <param name="user">User to Login</param>
         /// <returns>User Logged In</returns>
-        Task<User> loginUser(string authUser, string authPass);
+        Task<User> loginUser(string user);
         /// <summary>
         /// Returns if the username is already taken
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
         Task<User> updateUser(User user);
-        Task<Boolean> checkExisting(User user);
+        Task<Boolean> checkExisting(string username);
         /// <summary>
         /// Returns if username and password match
         /// </summary>
@@ -98,14 +98,14 @@ namespace Datalayer
         /// <summary>
         /// Creates new band
         /// </summary>
-      
+
         Task<List<Band>> GetBands(int bandId);
         /// <summary>
         /// Gets all created bands
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns>A list of band names </return>
-       
+
         Task DeleteBand(int bandId);
         /// <summary>
         /// Deletes a band
