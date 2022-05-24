@@ -17,9 +17,10 @@ public class CommentController : ControllerBase
         _dl = dl;
     }
 
-    [HttpPost("AddComment")]
-    public async Task Post(Comment commentToAdd)
+    [HttpPost("AddComment/{postIdee}")] // to avoid name confusion, idee is for the passed in post id
+    public async Task Post(Comment commentToAdd, int postIdee)
     {
+        commentToAdd.postId = postIdee;
         await _dl.AddCommentAsync(commentToAdd);
     }
 
@@ -35,7 +36,7 @@ public class CommentController : ControllerBase
         return await _dl.GetAllCommentsAsync(postId);
     }
 
-    [HttpGet("UpdateComment")]
+    [HttpPut("UpdateComment")]
     public async Task<Comment> Put(Comment commentToUpdate)
     {
         return await _dl.UpdateCommentAsync(commentToUpdate);

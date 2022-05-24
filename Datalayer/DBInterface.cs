@@ -10,25 +10,27 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to Create</param>
         /// <returns>User Created</returns>
-        Task<User> createUser(string userName, string userPass, string email);
+        Task<User> createUser(User user);
         /// <summary>
         /// Logs in a user, uses authenticateUser to check if matching, throws an exception if it isn't found
         /// </summary>
         /// <param name="user">User to Login</param>
         /// <returns>User Logged In</returns>
-        Task<User> loginUser(string authUser, string authPass);
+        Task<User> loginUser(string user);
         /// <summary>
         /// Returns if the username is already taken
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
-        Task<Boolean> checkExisting(User user);
+        Task<User> updateUser(User user);
+        Task<Boolean> checkExisting(string username);
         /// <summary>
         /// Returns if username and password match
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
         Task<Boolean> authenticateUser(User user);
+
 
         //************************************************ Post Related things ************************************************ 
         /// <summary>
@@ -91,11 +93,27 @@ namespace Datalayer
         Task<Comment> UpdateCommentAsync(Comment commentToUpdate);
 
         //Group/Team things
+        //Should we differentiate b/t bandId and bandmemberId? -Arrion
+        Task<Band> CreateBand(Band newBand);
         /// <summary>
-        /// Gets all band members for a single Band group/team ~Bailey
+        /// Creates new band
         /// </summary>
-        /// <param name="bandId">Integer value to be used to find certain records in database</param>
-        /// <returns>A list of individual BandMember objects</returns>
+
+        Task<List<Band>> GetBands(int bandId);
+        /// <summary>
+        /// Gets all created bands
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns>A list of band names </return>
+
+        Task DeleteBand(int bandId);
+        /// <summary>
+        /// Deletes a band
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns></returns>
+
+
         Task<List<BandMember>> GetAllBandMembers(int bandId);
         /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
@@ -108,7 +126,11 @@ namespace Datalayer
         /// </summary>
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
         Task RemoveBandMember(BandMember memberToDelete);
-
-        //Post Related things
+        /// <summary>
+        /// Gets a list of band names
+        /// </summary>
+        /// <param name="bandId"></param>
+        /// <returns></returns>
+        Task<List<string>> GetAllBandNames(int bandId);
     }
 }

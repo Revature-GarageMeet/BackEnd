@@ -15,62 +15,44 @@ public class DatabaseCalls : DBInterface
 
 
     //User Login/Registration things
-    public async Task<User> createUser(string userName, string userPass, string email)
+    public async Task<User> createUser(User user)
     {
-        
-        if (await checkExisting(userName))
-        {
-            //User Already Exists, throw an exception or something
-            //THIS NEEDS TO BE DONE STILL
-            return new User();
-        }
-        else
-        {
-            User newUser = new User()
-            {
-                username = userName,
-                password = userPass,
-                email = email
-            };
-            //prob need to add other default values to user still
-            _context.Users.Add(newUser);
-            await _context.SaveChangesAsync();
-            return newUser;
-        }
-
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
-    public async Task<User> loginUser(string authUser, string authPass)
+    public async Task<User> loginUser(string auth)
     {
-        if (await authenticateUser(authUser, authPass))
-        {
-            //If username and password match then give the user back
-            return await _context.Users.FirstOrDefaultAsync(user => user.username == authUser && user.password == authPass);
-        }
-        else
-        {
-            //if fail then throw an exception or something
-            return new User();
-        }
+        return await _context.Users.FirstOrDefaultAsync(user => user.username == auth);
     }
-    public async Task<Boolean> checkExisting(string authName)
+    public async Task<Boolean> checkExisting(string auth)
     {
-        return await _context.Users.AnyAsync(user => user.username == authName);
+        return await _context.Users.AnyAsync(user => user.username == auth);
     }
     public async Task<Boolean> authenticateUser(string authUser, string authPass)
     {
         return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
     }
 
+    public async Task<User> updateUser(User auth)
+    {
+        User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
+        Console.WriteLine(temp.bio);
+        temp.firstname = auth.firstname;
+        temp.lastname = auth.lastname;
+        temp.bio = auth.bio;
+        await _context.SaveChangesAsync();
+
+        Console.WriteLine(auth.bio);
+        return temp;
+    }
+
     //************************************************ Post Related Things ************************************************
     public async Task<List<Post>> GetPostsByUserAsync(User user)
     {
-        List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
-        List<Post> userx = new List<Post>();
-        foreach (Post p in temp)
-        {
-            userx.Add(await _context.Posts.FirstOrDefaultAsync(user => user.id == p.id));
-        }
-        return userx;
+        // List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
+        // return temp;
+        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
     }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
@@ -102,25 +84,27 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task likePostAsync(int postId, User user) 
+    public async Task likePostAsync(int postId, User user)
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        temp.likes++;
-        _context.Posts.Update(temp);
+        if (temp != null)
+        {
+            temp.likes++;
+            _context.Posts.Update(temp);
+        }
         //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
         await _context.SaveChangesAsync();
     }
 
     public async Task deletePostAsync(int postId)
-    {   
+    {
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t=> t.id == postId);
-        /*if(temp == null)
+        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        if (temp != null)
         {
-            return Task.CompletedTask;
-        }*/
-        _context.Posts.Remove(temp);
+            _context.Posts.Remove(temp);
+        }
         await _context.SaveChangesAsync();
     }
 
@@ -153,7 +137,7 @@ public class DatabaseCalls : DBInterface
     /// <returns>Returns list of comments respective to post id</returns>
     public async Task<List<Comment>> GetAllCommentsAsync(int postId)
     {
-        return await _context.Comments.AsNoTracking().ToListAsync();
+        return await _context.Comments.AsNoTracking().Where(comment => comment.postId == postId).ToListAsync();
     }
     /// <summary>
     ///     Author: Jose
@@ -172,11 +156,36 @@ public class DatabaseCalls : DBInterface
 
     //Group/Team things
 
+    //Band calls -Arrion
+    public async Task<Band> CreateBand(Band newBand)
+    {
+        _context.Bands.Add(newBand);
+        await _context.SaveChangesAsync();
+        return newBand;
+    }
+
+    public async Task<List<Band>> GetBands(int bandId)
+    {
+        return await _context.Bands.FromSqlRaw($"Select * From Band Where Bands.bandId = {bandId}").ToListAsync();
+    }
+
+    public async Task DeleteBand(Band bandToDelete)
+    {
+        _context.Bands.Remove(bandToDelete);
+        await _context.SaveChangesAsync();
+    }
+    public async Task DeleteBand(int bandId)
+    {
+        await _context.SaveChangesAsync();
+    }
+
     // Gets all members for a single Band ~Bailey
     public async Task<List<BandMember>> GetAllBandMembers(int bandId)
     {
         return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
     }
+
+    //Note to me(Arrion) don't forget band limit
 
     // Adds new member to database ~Bailey
     public async Task<BandMember> CreateBandMember(BandMember newMember)
@@ -191,6 +200,12 @@ public class DatabaseCalls : DBInterface
     {
         _context.BandMembers.Remove(memberToDelete);
         await _context.SaveChangesAsync();
+    }
+    // not implemented
+    public async Task<List<string>> GetAllBandNames(int bandId)
+    {
+        await _context.SaveChangesAsync();
+        return new List<string>();
     }
 
     public Task<bool> authenticateUser(User user)

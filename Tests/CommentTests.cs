@@ -77,7 +77,7 @@ public class CommentTests
 
         comment.dateCreated = currDate;
 
-        Assert.Equal(currDate, comment.postId);
+        Assert.Equal(currDate, comment.dateCreated);
     }
     // End of model tests
 
@@ -109,7 +109,7 @@ public class CommentTests
 
         CommentController com = new CommentController(mock.Object);
 
-        await com.Post(testComment);
+        await com.Post(testComment, testComment.postId);
 
         Assert.Equal(expectedComment.userId, testComment.userId);
         Assert.Equal(expectedComment.postId, testComment.postId);
@@ -186,11 +186,11 @@ public class CommentTests
             }
         };
 
-        mock.Setup(dl => dl.GetAllCommentsAsync(testPostId)).ReturnsAsync(fakeComment);
+        mock.Setup(dl => dl.GetAllCommentsAsync(testPostId)).ReturnsAsync(fakeComments);
 
         CommentController com = new CommentController(mock.Object);
 
-        List<Comment> comments = await com.Get(testPostId);
+        List<Comment> comments = await com.GetAll(testPostId);
 
         Assert.Equal(fakeComments, comments);
 
@@ -218,7 +218,7 @@ public class CommentTests
 
         Comment comment = await com.Put(updatedFakeComment);
 
-        Assert.Equal(fakeComment, comment);
+        Assert.Equal(updatedFakeComment, comment);
 
         mock.Verify(dl => dl.UpdateCommentAsync(updatedFakeComment), Times.Once());
     }
