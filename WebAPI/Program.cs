@@ -2,11 +2,9 @@ using Datalayer;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Cors;
-=======
 using Microsoft.OpenApi.Models;
->>>>>>> fcd61088943557b1899d900a73f65f892c547453
+
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -16,26 +14,18 @@ builder.Host.UseSerilog(
     .WriteTo.Console()
     .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
 );
-<<<<<<< HEAD
 
-
-=======
->>>>>>> fcd61088943557b1899d900a73f65f892c547453
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
-<<<<<<< HEAD
+
                         {
                             policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876, http://localhost:7088")
-=======
-                      {
-                          policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876")
->>>>>>> fcd61088943557b1899d900a73f65f892c547453
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowAnyOrigin();
-                      });
+                        });
 });
 
 // Add services to the container.
