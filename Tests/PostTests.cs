@@ -72,9 +72,8 @@ public class PostsTests
     public void GetSetType()
     {
         Post post = new Post();
-        post.type = true;
 
-        Assert.True(post.type);
+        Assert.Equal("",post.type);
     }
 
     [Fact]
@@ -103,7 +102,7 @@ public class PostsTests
                 likes = 3,
                 dateCreated = date,
                 bandId = 4,
-                type = true
+                type = ""
             }
         };
 
@@ -133,7 +132,7 @@ public class PostsTests
                 likes = 2,
                 dateCreated = date,
                 bandId = 3,
-                type = true
+                type = ""
             }
         };
 
@@ -163,7 +162,7 @@ public class PostsTests
                 likes = 3,
                 dateCreated = date,
                 bandId = 4,
-                type = true
+                type = ""
             }
         };
 
@@ -183,34 +182,36 @@ public class PostsTests
             entry = "test"
         };
 
-        mock.Setup(db => db.postForBandAsync(newPost.bandId, newPost.entry));
+        mock.Setup(db => db.postForBandAsync(newPost.bandId, newPost.entry, newPost.type));
         PostController mockPost = new PostController(mock.Object);
-        await mockPost.postForBand(newPost.bandId, newPost.entry);
-        mock.Verify(dl => dl.postForBandAsync(newPost.bandId, newPost.entry));
+        await mockPost.postForBand(newPost.bandId, newPost.entry, newPost.type);
+        mock.Verify(dl => dl.postForBandAsync(newPost.bandId, newPost.entry, newPost.type));
     }
 
-    [Fact]
-    public async Task postForUser()
-    {
-        User testUser = new User() {id = 1};
-        string textEntry = "test";
+    // [Fact]
+    // public async Task postForUser()
+    // {
+    //     User testUser = new User() {id = 1};
+    //     string textEntry = "test";
+    //     string postType = "";
 
-        mock.Setup(db => db.postForUserAsync(testUser, textEntry));
-        PostController mockPost = new PostController(mock.Object);
-        await mockPost.postForUser(testUser, textEntry);
-        mock.Verify(dl => dl.postForUserAsync(testUser, textEntry));
-    }
+    //     mock.Setup(db => db.postForUserAsync(testUser, textEntry, postType));
+    //     PostController mockPost = new PostController(mock.Object);
+    //     await mockPost.postForUser(testUser, textEntry, postType);
+    //     mock.Verify(dl => dl.postForUserAsync(testUser, textEntry, postType));
+    // }
 
     [Fact]
     public async Task postForUserId()
     {
         int testUserId = 1;
         string testTextEntry = "";
+        string testPostType = "";
 
-        mock.Setup(db => db.postForUserIdAsync(testUserId, testTextEntry));
+        mock.Setup(db => db.postForUserIdAsync(testUserId, testTextEntry, testPostType));
         PostController mockPost = new PostController(mock.Object);
-        await mockPost.postForUserId(testUserId, testTextEntry);
-        mock.Verify(dl => dl.postForUserIdAsync(testUserId, testTextEntry));
+        await mockPost.postForUserId(testUserId, testTextEntry, testPostType);
+        mock.Verify(dl => dl.postForUserIdAsync(testUserId, testTextEntry, testPostType));
     }
 
     [Fact]

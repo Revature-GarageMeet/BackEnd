@@ -109,7 +109,7 @@ public class CommentTests
 
         CommentController com = new CommentController(mock.Object);
 
-        await com.Post(testComment);
+        await com.Post(testComment, testComment.postId);
 
         Assert.Equal(expectedComment.userId, testComment.userId);
         Assert.Equal(expectedComment.postId, testComment.postId);
