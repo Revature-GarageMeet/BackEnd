@@ -112,7 +112,7 @@ public class DatabaseCalls : DBInterface
         return await _context.Bands.FromSqlRaw($"Select * From Band Where Bands.bandId = {bandId}").ToListAsync();
     }
 
-    public async Task DeleteBand(Band bandToDelete)
+    public async Task Delete(Band bandToDelete)
     {
         _context.Bands.Remove(bandToDelete);
         await _context.SaveChangesAsync();
@@ -139,6 +139,11 @@ public class DatabaseCalls : DBInterface
     {
         _context.BandMembers.Remove(memberToDelete);
         await _context.SaveChangesAsync();
+    }
+
+    public Task DeleteBand(int bandId)
+    {
+        throw new NotImplementedException();
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -17,9 +16,9 @@ namespace WebAPI.Controllers
         }
         // Gets Band Name
         [HttpGet]
-        public async Task<List<BandName>> GetAll(int bandId)
+        public async Task<List<Band>> GetBands(int bandId)
         {
-            return await _db.GetAllBandNames(bandId);
+            return await _db.GetBands(bandId);
         }
 
         // GET api/<BandController>/5
@@ -43,8 +42,9 @@ namespace WebAPI.Controllers
 
         // DELETE api/<BandController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteBand(int bandId)
         {
+
         }
     }
 }
