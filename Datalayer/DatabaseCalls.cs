@@ -84,7 +84,7 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task likePostAsync(int postId, User user)
+    public async Task likePostAsync(int postId, int userId)
     {
         // might not work, just put it here for now. Also allows for inifite likes
         Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
@@ -216,6 +216,11 @@ public class DatabaseCalls : DBInterface
     public Task<bool> checkExisting(User user)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<Post> GetPostByPostID( int postID)
+    {
+        return await _context.Posts.FirstOrDefaultAsync(_post => _post.id == postID);
     }
 }
 

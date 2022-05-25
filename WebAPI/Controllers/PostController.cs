@@ -46,6 +46,13 @@ public class PostController : ControllerBase
         return await _db.GetPostsByUserAsync(user);
     }
 
+    [HttpGet("GetPostByPostID/{postID}")]
+    public async Task<Post> getPostByPostUserID(int postID)
+    {
+        Post post = new Post();
+        return await _db.GetPostByPostID(postID);
+    }
+
     [HttpGet("GetPostByBandID/{bandId}")]
     public async Task<List<Post>> getPostbyBandID(int bandId)
     {
@@ -72,10 +79,10 @@ public class PostController : ControllerBase
         await _db.postForUserIdAsync(userId, textEntry, postType);
     }
 
-    [HttpPut("LikePost/{postId}/{user}")]
-    public async Task likePost(int postId, User user)
+    [HttpPut("LikePost/{postId}/{userId}")]
+    public async Task likePost(int postId, int userId)
     {
-        await _db.likePostAsync(postId, user);
+        await _db.likePostAsync(postId, userId);
     }
 
     [HttpDelete("DeletePost/{postId}")]
