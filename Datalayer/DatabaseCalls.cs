@@ -86,16 +86,33 @@ public class DatabaseCalls : DBInterface
 
     public async Task likePostAsync(int postId, int userId)
     {
+        Console.WriteLine($"{postId} {userId}");
         // might not work, just put it here for now. Also allows for inifite likes
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        if (temp != null)
+        LikedPosts testPost = await _context.LikedPosts.FirstOrDefaultAsync(t => t.postid == postId && t.userid == userId);
+        if(testPost == null) 
         {
-            temp.likes++;
-            _context.Posts.Update(temp);
+            
+            _context.LikedPosts.FromSqlRaw($"INSERT INTO LikedPosts(userid, postid) VALUES({userId},{postId})");
+            Console.WriteLine("Liking the Post");
         }
-        //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+        else
+        {
+            Console.WriteLine("Unliking the post");
+            _context.LikedPosts.Remove(testPost);
+        }
+        
         await _context.SaveChangesAsync();
+        
+        // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        // if (temp != null)
+        // {
+        //     temp.likes++;
+        //     _context.Posts.Update(temp);
+        // }
+        // //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+        // await _context.SaveChangesAsync();
     }
+
 
     public async Task deletePostAsync(int postId)
     {

@@ -68,6 +68,7 @@ namespace Datalayer
         /// </summary>
         Task likePostAsync(int postId, int user);
 
+
         Task deletePostAsync(int postId);
         /// <summary>
         ///     Author: Jose

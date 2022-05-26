@@ -3,6 +3,7 @@ namespace Models
 {
     public class LikedPosts
     {
+        
         /// <summary>
         /// User's Id
         /// </summary>
