@@ -30,8 +30,8 @@ namespace Datalayer.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     memberLimit = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -40,20 +40,16 @@ namespace Datalayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "LikedPosts",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    userid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<int>(type: "int", nullable: false),
-                    postId = table.Column<int>(type: "int", nullable: false),
-                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    likes = table.Column<int>(type: "int", nullable: false),
-                    dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    postid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.id);
+                    table.PrimaryKey("PK_LikedPosts", x => x.userid);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,12 +58,12 @@ namespace Datalayer.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    entry = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userId = table.Column<int>(type: "int", nullable: false),
                     likes = table.Column<int>(type: "int", nullable: false),
                     dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     bandId = table.Column<int>(type: "int", nullable: false),
-                    type = table.Column<bool>(type: "bit", nullable: false)
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,17 +76,45 @@ namespace Datalayer.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    postId = table.Column<int>(type: "int", nullable: false),
+                    entry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    likes = table.Column<int>(type: "int", nullable: false),
+                    dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Posts_postId",
+                        column: x => x.postId,
+                        principalTable: "Posts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_postId",
+                table: "Comments",
+                column: "postId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -105,10 +129,13 @@ namespace Datalayer.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "LikedPosts");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
         }
     }
 }

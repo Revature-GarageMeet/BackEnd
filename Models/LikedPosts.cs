@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace Models
 {
+    
     public class LikedPosts
     {
         
@@ -8,7 +9,7 @@ namespace Models
         /// User's Id
         /// </summary>
         /// <value>User's Id</value>
-        [Key]        
+        [Key]
         public int userid { get; set; }
 
         /// <summary>

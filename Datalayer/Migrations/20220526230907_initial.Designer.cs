@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(GMDBContext))]
-    [Migration("20220512194928_initial")]
+    [Migration("20220526230907_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,14 +33,12 @@ namespace Datalayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<string>("description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("memberLimit")
                         .HasColumnType("int");
 
                     b.Property<string>("title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -82,7 +80,6 @@ namespace Datalayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("entry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("likes")
@@ -96,7 +93,25 @@ namespace Datalayer.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("postId");
+
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Models.LikedPosts", b =>
+                {
+                    b.Property<int>("userid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userid"), 1L, 1);
+
+                    b.Property<int>("postid")
+                        .HasColumnType("int");
+
+                    b.HasKey("userid");
+
+                    b.ToTable("LikedPosts");
                 });
 
             modelBuilder.Entity("Models.Post", b =>
@@ -114,14 +129,13 @@ namespace Datalayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("entry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("likes")
                         .HasColumnType("int");
 
-                    b.Property<bool>("type")
-                        .HasColumnType("bit");
+                    b.Property<string>("type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("userId")
                         .HasColumnType("int");
@@ -140,32 +154,40 @@ namespace Datalayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<string>("bio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("firstname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("lastname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Models.Comment", b =>
+                {
+                    b.HasOne("Models.Post", null)
+                        .WithMany("postComments")
+                        .HasForeignKey("postId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Post", b =>
+                {
+                    b.Navigation("postComments");
                 });
 #pragma warning restore 612, 618
         }
