@@ -88,29 +88,37 @@ public class DatabaseCalls : DBInterface
     {
         Console.WriteLine($"{postId} {userId}");
         // might not work, just put it here for now. Also allows for inifite likes
-        LikedPosts testPost = await _context.LikedPosts.FirstOrDefaultAsync(t => t.postid == postId && t.userid == userId);
-        if(testPost == null) 
-        {
-            
-            _context.LikedPosts.FromSqlRaw($"INSERT INTO LikedPosts(userid, postid) VALUES({userId},{postId})");
-            Console.WriteLine("Liking the Post");
-        }
-        else
-        {
-            Console.WriteLine("Unliking the post");
-            _context.LikedPosts.Remove(testPost);
-        }
+        #region Work In Progress - Tucker
+        // LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
+        
+        // if(testPost == null) 
+        // {
+        //     testPost = new LikedPosts()
+        //     {
+        //         userid = userId,
+        //         postid = postId
+        //     };
+        //     Console.WriteLine("Liking the Post");
+        //     await _context.LikedPosts.AddAsync(testPost);
+        // }
+        // else
+        // {
+        //     Console.WriteLine("Unliking the post");
+        //     _context.LikedPosts.Update(_context.LikedPosts.Remove(testPost));
+        //     // _context.LikedPosts.Remove(testPost);
+        // }
+        #endregion
         
         await _context.SaveChangesAsync();
         
-        // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        // if (temp != null)
-        // {
-        //     temp.likes++;
-        //     _context.Posts.Update(temp);
-        // }
-        // //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
-        // await _context.SaveChangesAsync();
+        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        if (temp != null)
+        {
+            temp.likes++;
+            _context.Posts.Update(temp);
+        }
+        //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+        await _context.SaveChangesAsync();
     }
 
 
