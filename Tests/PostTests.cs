@@ -220,10 +220,10 @@ public class PostsTests
         User testUser = new User();
         int testPostId = 1;
 
-        mock.Setup(db => db.likePostAsync(testPostId, testUser));
+        mock.Setup(db => db.likePostAsync(testPostId, testUser.id));
         PostController mockPost = new PostController(mock.Object);
-        await mockPost.likePost(testPostId, testUser);
-        mock.Verify(dl => dl.likePostAsync(testPostId, testUser));
+        await mockPost.likePost(testPostId, testUser.id);
+        mock.Verify(dl => dl.likePostAsync(testPostId, testUser.id));
     }
 
     [Fact]

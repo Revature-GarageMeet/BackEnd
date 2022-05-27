@@ -84,18 +84,51 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task likePostAsync(int postId, User user)
+    public async Task LikePostAsync(int postId, int userId)
     {
+        Console.WriteLine($"{postId} {userId}");
         // might not work, just put it here for now. Also allows for inifite likes
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        if (temp != null)
+        
+        LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
+        
+        if(testPost == null) 
         {
-            temp.likes++;
-            _context.Posts.Update(temp);
+            testPost = new LikedPosts()
+            {
+                userid = userId,
+                postid = postId
+            };
+            Console.WriteLine("Liking the Post");
+            await _context.LikedPosts.AddAsync(testPost);
         }
-        //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+        else
+        {
+            Console.WriteLine($"Un-Liking the Post");
+            // _context.LikedPosts.Update(_context.LikedPosts.Remove(testPost));
+            _context.LikedPosts.Remove(testPost);
+            //_context.LikedPosts.Update(testPost);
+        }
         await _context.SaveChangesAsync();
+        
+        // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        // if (temp != null)
+        // {
+        //     temp.likes++;
+        //     _context.Posts.Update(temp);
+        // }
+        // //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+        // await _context.SaveChangesAsync();
     }
+
+    public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
+    {
+        return await _context.LikedPosts.AsNoTracking().Where(t => t.userid == userId).ToListAsync();
+    }
+
+
+
+
+
 
     public async Task deletePostAsync(int postId)
     {
@@ -217,6 +250,13 @@ public class DatabaseCalls : DBInterface
     {
         throw new NotImplementedException();
     }
+
+    public async Task<Post> GetPostByPostID( int postID)
+    {
+        return await _context.Posts.FirstOrDefaultAsync(_post => _post.id == postID);
+    }
+
+
 }
 
 

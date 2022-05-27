@@ -38,6 +38,12 @@ namespace Datalayer
         /// </summary>
         Task<List<Post>> GetPostsByUserAsync(User user);
         /// <summary>
+        /// Gets the post from both Post and User ID for liking a post
+        /// </summary>
+        /// <param name="postID">Post ID that the user is liking</param>
+        /// <returns></returns>
+        Task<Post> GetPostByPostID(int postID);
+        /// <summary>
         /// Returns all posts from a user's id
         /// </summary>
         Task<List<Post>> getPostbyUserIdAsync(int userId);
@@ -60,7 +66,10 @@ namespace Datalayer
         /// <summary>
         /// Like post, not sure how this should really be done - maybe we really do need a like table????
         /// </summary>
-        Task likePostAsync(int postId, User user);
+        Task LikePostAsync(int postId, int user);
+
+        
+        Task<List<LikedPosts>>GetUserLikesAsync(int userId);
 
         Task deletePostAsync(int postId);
         /// <summary>

@@ -30,8 +30,8 @@ namespace Datalayer.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     memberLimit = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -40,17 +40,30 @@ namespace Datalayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LikedPosts",
+                columns: table => new
+                {
+                    userid = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    postid = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikedPosts", x => x.userid);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    entry = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userId = table.Column<int>(type: "int", nullable: false),
                     likes = table.Column<int>(type: "int", nullable: false),
                     dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     bandId = table.Column<int>(type: "int", nullable: false),
-                    type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,12 +76,12 @@ namespace Datalayer.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,7 +96,7 @@ namespace Datalayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(type: "int", nullable: false),
                     postId = table.Column<int>(type: "int", nullable: false),
-                    entry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    entry = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     likes = table.Column<int>(type: "int", nullable: false),
                     dateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -114,6 +127,9 @@ namespace Datalayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "LikedPosts");
 
             migrationBuilder.DropTable(
                 name: "Users");
