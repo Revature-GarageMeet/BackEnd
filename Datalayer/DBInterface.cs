@@ -67,9 +67,9 @@ namespace Datalayer
         /// Like post, not sure how this should really be done - maybe we really do need a like table????
         /// </summary>
         Task LikePostAsync(int postId, int user);
-Task UnlikePostAsync(int postId, int user);
+        Task UnlikePostAsync(int postId, int user);
         Task<int> GetPostLikesAsync(int postId);
-        Task<List<LikedPosts>>GetUserLikesAsync(int userId);
+        Task<List<LikedPosts>> GetUserLikesAsync(int userId);
 
         Task deletePostAsync(int postId);
         /// <summary>
@@ -122,7 +122,11 @@ Task UnlikePostAsync(int postId, int user);
         /// <param name="bandId"></param>
         /// <returns></returns>
 
-
+        /// <summary>
+        /// Gets every bandmember that is apart of a specific Band
+        /// </summary>
+        /// <param name="bandId">Unique id attached to a band</param>
+        /// <returns>List of every bandmember record attached to a specific bandId</returns>
         Task<List<BandMember>> GetAllBandMembers(int bandId);
         /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
@@ -141,5 +145,11 @@ Task UnlikePostAsync(int postId, int user);
         /// <param name="bandId"></param>
         /// <returns></returns>
         Task<List<string>> GetAllBandNames(int bandId);
+        /// <summary>
+        /// Gets all band records in the database
+        /// </summary>
+        /// <returns>List containing every Band record</returns>
+        Task<List<Band>> GetAllBands();
+        Task UpdateBand(Band changeBand);
     }
 }

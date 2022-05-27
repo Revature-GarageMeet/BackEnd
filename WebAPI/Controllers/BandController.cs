@@ -23,22 +23,24 @@ namespace WebAPI.Controllers
         }
 
         // GET api/<BandController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetBands")]
+        public async Task<List<Band>> GetAllBandDetails()
         {
-            return "value";
+            return await _db.GetAllBands();
         }
 
         // POST api/<BandController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Band> Post(Band newBand)
         {
+            return await _db.CreateBand(newBand);
         }
 
         // PUT api/<BandController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task Put(Band changeBand)
         {
+            await _db.UpdateBand(changeBand);
         }
 
         // DELETE api/<BandController>/5
