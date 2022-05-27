@@ -42,8 +42,13 @@ namespace Models
         ///Holds comments tied to the post
         ///</summary>
         /// <value>List of comments</value>
-        public List<Comment> postComments {get; set;} 
-    }
+        public List<Comment> postComments {get; set;}
+        ///<summary>
+        ///Shows comments on homepage
+        ///</summary>
+        /// <value>List of comments</value>
+        public bool showComments {get; set;}
+        }
 }
 
 /*
