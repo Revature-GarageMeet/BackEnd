@@ -5,7 +5,7 @@
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Humanizer.dll": {}
+          "lib/netstandard2.0/_._": {}
         },
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {}
@@ -115,7 +115,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "6.0.5"
         },
         "compile": {
-          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+          "lib/net6.0/_._": {}
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {}
@@ -2056,20 +2056,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chain\\.nuget\\packages\\": {}
+    "C:\\Users\\Bailey\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\WebAPI\\obj\\",
+      "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Bailey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -2082,11 +2092,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj": {
-              "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Datalayer\\Datalayer.csproj"
+            "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {
+              "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj"
             },
-            "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\Back\\BackEnd\\Models\\Models.csproj"
+            "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
+              "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj"
             }
           }
         }
