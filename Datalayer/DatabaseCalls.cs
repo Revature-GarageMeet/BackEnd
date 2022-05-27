@@ -48,21 +48,7 @@ public class DatabaseCalls : DBInterface
     }
 
     //************************************************ Post Related Things ************************************************
-    public async Task<List<Post>> GetPostsByUserAsync(User user)
-    {
-        // List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
-        // return temp;
-        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
-    }
-    public async Task<List<Post>> getPostbyUserIdAsync(int userId)
-    {
-        return await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
-    }
-
-    public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
-    {
-        return await _context.Posts.AsNoTracking().Where(post => post.bandId == bandId).ToListAsync();
-    }
+    
 
     public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {
@@ -86,7 +72,7 @@ public class DatabaseCalls : DBInterface
 
     public async Task LikePostAsync(int postId, int userId)
     {
-        Console.WriteLine($"{postId} {userId}");
+    
         // might not work, just put it here for now. Also allows for inifite likes
         
         LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
@@ -100,15 +86,34 @@ public class DatabaseCalls : DBInterface
             };
             Console.WriteLine("Liking the Post");
             await _context.LikedPosts.AddAsync(testPost);
+            await _context.SaveChangesAsync();
         }
         else
         {
             Console.WriteLine($"Un-Liking the Post");
             // _context.LikedPosts.Update(_context.LikedPosts.Remove(testPost));
             _context.LikedPosts.Remove(testPost);
-            //_context.LikedPosts.Update(testPost);
+            
+            await _context.SaveChangesAsync();
+            
+            // try
+            // {
+            // _context.LikedPosts.Remove(testPost);
+
+            // _context.SaveChanges();
+            // }
+            // catch(DbUpdateConcurrencyException ex)
+            // {
+                
+            //     throw new Exception("Record does not exist in the database: " + ex.Message);
+            // }
+            // catch(Exception ex)
+            // {
+            //     throw;
+            // }
+            
         }
-        await _context.SaveChangesAsync();
+        
         
         // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
         // if (temp != null)
@@ -118,6 +123,24 @@ public class DatabaseCalls : DBInterface
         // }
         // //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
         // await _context.SaveChangesAsync();
+    }
+
+    public async Task UnlikePostAsync(int postId, int userId )
+    {
+        //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
+        LikedPosts temp = await _context.LikedPosts.FirstOrDefaultAsync(t => t.postid == postId && t.userid == userId);
+        if (temp != null)
+        {
+            _context.LikedPosts.Remove(temp);
+        }
+        await _context.SaveChangesAsync();
+    }
+
+
+    public async Task<int> GetPostLikesAsync(int postId)
+    {
+        int postLikes = await _context.LikedPosts.CountAsync(t => t.postid == postId);
+        return postLikes;
     }
 
     public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
@@ -251,10 +274,52 @@ public class DatabaseCalls : DBInterface
         throw new NotImplementedException();
     }
 
+    #region Getting Posts
+
     public async Task<Post> GetPostByPostID( int postID)
     {
-        return await _context.Posts.FirstOrDefaultAsync(_post => _post.id == postID);
+        Post tempPost = await _context.Posts.FirstOrDefaultAsync(_post => _post.id == postID);
+        tempPost.likes = await GetPostLikesAsync(postID);
+        return tempPost;
     }
+
+    public async Task<List<Post>> GetPostsByUserAsync(User user)
+    {
+         List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
+         foreach(Post _post in temp)
+         {
+             _post.likes = await GetPostLikesAsync(_post.id);
+         }
+        
+        return temp;
+    }
+    public async Task<List<Post>> getPostbyUserIdAsync(int userId)
+    {
+        List<Post> temp =  await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
+        foreach(Post _post in temp)
+        {
+            _post.likes = await GetPostLikesAsync(_post.id);
+        }
+        return temp;
+    }
+
+    public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
+    {
+        List<Post> temp = await _context.Posts.AsNoTracking().Where(post => post.bandId == bandId).ToListAsync();
+        foreach(Post _post in temp)
+        {
+            _post.likes = await GetPostLikesAsync(_post.id);
+        }
+        return temp;
+    }
+
+
+    #endregion
+
+    #region  
+
+    #endregion
+
 
 
 }

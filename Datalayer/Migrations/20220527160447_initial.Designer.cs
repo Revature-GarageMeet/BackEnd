@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(GMDBContext))]
-    [Migration("20220526230907_initial")]
+    [Migration("20220527160447_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,16 +100,19 @@ namespace Datalayer.Migrations
 
             modelBuilder.Entity("Models.LikedPosts", b =>
                 {
-                    b.Property<int>("userid")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userid"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<int>("postid")
                         .HasColumnType("int");
 
-                    b.HasKey("userid");
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
 
                     b.ToTable("LikedPosts");
                 });

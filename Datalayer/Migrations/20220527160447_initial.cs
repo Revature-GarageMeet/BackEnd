@@ -43,13 +43,14 @@ namespace Datalayer.Migrations
                 name: "LikedPosts",
                 columns: table => new
                 {
-                    userid = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    userid = table.Column<int>(type: "int", nullable: false),
                     postid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LikedPosts", x => x.userid);
+                    table.PrimaryKey("PK_LikedPosts", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
