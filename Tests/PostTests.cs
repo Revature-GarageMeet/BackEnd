@@ -214,17 +214,17 @@ public class PostsTests
         mock.Verify(dl => dl.postForUserIdAsync(testUserId, testTextEntry, testPostType));
     }
 
-    [Fact]
-    public async Task likePost()
-    {
-        User testUser = new User();
-        int testPostId = 1;
+    // [Fact]
+    // public async Task likePost()
+    // {
+    //     User testUser = new User();
+    //     int testPostId = 1;
 
-        mock.Setup(db => db.likePostAsync(testPostId, testUser));
-        PostController mockPost = new PostController(mock.Object);
-        await mockPost.likePost(testPostId, testUser);
-        mock.Verify(dl => dl.likePostAsync(testPostId, testUser));
-    }
+    //     mock.Setup(db => db.likePostAsync(testPostId, testUser));
+    //     PostController mockPost = new PostController(mock.Object);
+    //     await mockPost.likePost(testPostId, testUser);
+    //     mock.Verify(dl => dl.likePostAsync(testPostId, testUser));
+    // }
 
     [Fact]
     public async Task Delete()
