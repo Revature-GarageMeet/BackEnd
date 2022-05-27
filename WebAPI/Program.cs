@@ -1,8 +1,12 @@
+using System;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Datalayer;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore;
 using Microsoft.OpenApi.Models;
+using System.Threading.Tasks;
 using Hubs;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -18,10 +22,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
                     {
-                        policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876")
+                        policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876, http://localhost:4201")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowAnyOrigin();
+                            //.AllowCredentials();
                     });
 });
 
@@ -39,7 +44,7 @@ builder.Services.AddDbContext<GMDBContext>(options => options.UseSqlServer(build
 builder.Services.AddScoped<DBInterface, DatabaseCalls>();
 
 var app = builder.Build();
-
+app.MapHub<MessageHub>("/chatsocket");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -55,7 +60,14 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-/*Adds the map hub*/
-app.MapHub<MessageHub>("../Datalayer");
-
+app.UseRouting();
+/*Adds the map hub
+//app.MapHub<MessageHub>("../Datalayer");
+app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+        
+        endpoints.MapHub<MessageHub>("/chatsocket");
+    });
+*/
 app.Run();

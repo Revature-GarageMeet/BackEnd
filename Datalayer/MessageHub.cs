@@ -1,13 +1,15 @@
 using Models;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Threading.Tasks;
 
-namespace Hubs;
-
-public class MessageHub:Hub
+namespace Hubs 
 {
-    public async Task NewMessage(ChatMessage msg)
+    public class MessageHub:Hub
     {
-        await Clients.All.SendAsync("MessageReceived", msg);
+        public async Task NewMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("MessageReceived", user, message);
+        }
     }
 }
