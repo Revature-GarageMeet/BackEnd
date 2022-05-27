@@ -2,32 +2,48 @@ using Microsoft.AspNetCore.Mvc;
 
 
 namespace WebAPI.Controllers;
-[ApiController]
 [Route("[controller]")]
+[ApiController]
 public class UserController : ControllerBase
 {
-    private readonly repo _db;
-    public UserController(repo db)
+    private readonly DBInterface _db;
+    public UserController(DBInterface db)
     {
         _db = db;
     }
-
-
-    [HttpGet]
-    public User login(User user)
+    [HttpGet("Login/{user}")]
+    public async Task<User> login(string user)
     {
-        return new User();
-        // return _db.loginUser(user);
+        return await _db.loginUser(user);
+    }
+
+    [HttpGet("Authenticate")]
+    public async Task<Boolean> authenticate(User user)
+    {
+        return await _db.authenticateUser(user);
+    }
+
+    [HttpGet("Existing/{username}")]
+    public async Task<Boolean> existing(string username)
+    {
+        return await _db.checkExisting(username);
     }
 
     [HttpPost]
-    public void createUser(User user){
-        // _db.createUser(user);
-        // probably make this actually return the user rather than just adding to db. also make everything ^^ async
+    public async Task<User> createUser(User user)
+    {
+        return await _db.createUser(user);
+    }
+
+    [HttpPut]
+    public async Task<User> updateUser(User user)
+    {
+        return await _db.updateUser(user);
     }
 }
 /*
-    post createuser
-    get login
-    ~leo
+   post createuser
+   get login
+   both methods pass into the DatabaseCalls.cs methods and return the user created/logged in
+   ~leo
 */
