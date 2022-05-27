@@ -79,11 +79,21 @@ public class PostController : ControllerBase
         await _db.postForUserIdAsync(userId, textEntry, postType);
     }
 
-    [HttpPut("LikePost/{postId}/{userId}")]
-    public async Task likePost(int postId, int userId)
+    [HttpGet("GetLikes/{userId}")]
+    public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
     {
-        await _db.likePostAsync(postId, userId);
+        return await _db.GetUserLikesAsync(userId);
     }
+
+    [HttpPut("LikePost/{postId}/{userId}")]
+    public async Task likePostAsync(int postId, int userId)
+    {
+        await _db.LikePostAsync(postId, userId);
+    }
+    
+
+
+
 
     [HttpDelete("DeletePost/{postId}")]
     public async Task Delete(int postId)

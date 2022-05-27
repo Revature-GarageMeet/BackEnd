@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(GMDBContext))]
-    [Migration("20220526203859_Migrations")]
-    partial class Migrations
+    [Migration("20220526230907_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
