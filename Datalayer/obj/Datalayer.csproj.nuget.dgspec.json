@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {}
+    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {
+    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "projectUniqueName": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
         "projectName": "Datalayer",
-        "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
         "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\obj\\",
+        "outputPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -35,8 +35,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
-                "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj"
+              "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj"
               }
             }
           }
@@ -91,14 +91,14 @@
         }
       }
     },
-    "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
+    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\obj\\",
+        "outputPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
