@@ -11,6 +11,8 @@ namespace Datalayer
         /// <param name="user">User to Create</param>
         /// <returns>User Created</returns>
         Task<User> createUser(User user);
+        Task<List<string>> GetAllBands(int bandId);
+
         /// <summary>
         /// Logs in a user, uses authenticateUser to check if matching, throws an exception if it isn't found
         /// </summary>

@@ -8,43 +8,34 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BandController : ControllerBase
     {
-        private readonly DBInterface _db;
+        private readonly DBInterface _dl;
 
-        public BandController(DBInterface db)
+        public BandController(DBInterface dl)
         {
-            _db = db;
+            _dl = dl;
 
         }
         // Gets Band Name
-        [HttpGet]
-        public async Task<List<string>> GetAll(int bandId)
+        [HttpGet("GetAllBands/bandId")]
+        public async Task<List<string>> GetAllBands(int bandId)
         {
-            return await _db.GetAllBandNames(bandId);
+            return await _dl.GetAllBands(bandId);
         }
 
-        // GET api/<BandController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+     
 
         // POST api/<BandController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("AddBand")]
+        public async Task<List<string>> Post(int bandId)
         {
-        }
-
-        // PUT api/<BandController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            return await _dl.CreateBand(newBand); 
         }
 
         // DELETE api/<BandController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("Delete Band")]
+        public async void Delete(Band bandToDelete)
         {
+            await _dl.DeleteBand(bandToDelete);
         }
     }
 }
