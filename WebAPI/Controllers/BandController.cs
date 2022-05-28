@@ -26,9 +26,9 @@ namespace WebAPI.Controllers
 
         // POST api/<BandController>
         [HttpPost("AddBand")]
-        public async Task<List<string>> Post(int bandId)
+        public async Task<List<string>> Post(int Id)
         {
-            return await _dl.CreateBand(newBand); 
+            return await _dl.CreateBand(Id); 
         }
 
         // DELETE api/<BandController>/5

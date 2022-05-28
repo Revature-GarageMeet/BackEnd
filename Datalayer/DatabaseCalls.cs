@@ -313,6 +313,16 @@ public class DatabaseCalls : DBInterface
         return temp;
     }
 
+    public Task<List<string>> GetAllBands(int bandId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<string>> CreateBand(object newBand)
+    {
+        throw new NotImplementedException();
+    }
+
 
     #endregion
 

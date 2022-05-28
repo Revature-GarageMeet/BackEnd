@@ -19,6 +19,9 @@ namespace Datalayer
         /// <param name="user">User to Login</param>
         /// <returns>User Logged In</returns>
         Task<User> loginUser(string user);
+        Task<List<string>> CreateBand(object newBand);
+        Task DeleteBand(Band bandToDelete);
+
         /// <summary>
         /// Returns if the username is already taken
         /// </summary>
