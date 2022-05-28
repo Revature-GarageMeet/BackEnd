@@ -258,6 +258,11 @@ public class DatabaseCalls : DBInterface
         return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
     }
 
+    public async Task<int> GetBandMemberBandId(int userId) {
+        BandMember bandmem = await _context.BandMembers.FirstOrDefaultAsync(bandmem => bandmem.userId == userId);
+        return bandmem.bandId;
+    }
+
     //Note to me(Arrion) don't forget band limit
 
     // Adds new member to database ~Bailey

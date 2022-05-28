@@ -129,6 +129,12 @@ namespace Datalayer
         /// <returns>List of every bandmember record attached to a specific bandId</returns>
         Task<List<BandMember>> GetAllBandMembers(int bandId);
         /// <summary>
+        /// Gets the bandId attached to the bandmember that is being checked
+        /// </summary>
+        /// <param name="userId">The userid of the user being checked to find bandmember record</param>
+        /// <returns>The bandId for a specific bandmember</returns>
+        Task<int> GetBandMemberBandId(int userId);
+        /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
         /// </summary>
         /// <param name="newMember">A BandMember object to be added</param>
