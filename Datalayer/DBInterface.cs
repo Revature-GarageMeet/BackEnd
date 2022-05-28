@@ -147,7 +147,7 @@ namespace Datalayer
         /// Removes a BandMember record from the BandMember DB Table ~Bailey
         /// </summary>
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
-        Task RemoveBandMember(BandMember memberToDelete);
+        Task RemoveBandMember(int bandMemId);
         /// <summary>
         /// Checks to see if the user is already in a band or not
         /// </summary>

@@ -290,9 +290,10 @@ public class DatabaseCalls : DBInterface
     }
 
     // Removes a member from the database ~Bailey
-    public async Task RemoveBandMember(BandMember memberToDelete)
+    public async Task RemoveBandMember(int bandMemId)
     {
-        _context.BandMembers.Remove(memberToDelete);
+        BandMember tempBandMem = await _context.BandMembers.FirstOrDefaultAsync(bandmem => bandmem.id == bandMemId);
+        _context.BandMembers.Remove(tempBandMem);
         await _context.SaveChangesAsync();
     }
 

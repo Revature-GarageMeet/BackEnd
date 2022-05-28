@@ -41,10 +41,10 @@ public class BandMemberController : ControllerBase
     }
 
     // Removes a band member record from the database
-    [HttpDelete("RemoveBandMember/{memberToDelete}")]
-    public async Task Delete([FromBody] BandMember memberToDelete)
+    [HttpDelete("RemoveBandMember/{bandMemId}")]
+    public async Task Delete(int bandMemId)
     {
-        await _dl.RemoveBandMember(memberToDelete);
+        await _dl.RemoveBandMember(bandMemId);
     }
 
 }
