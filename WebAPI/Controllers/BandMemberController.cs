@@ -17,7 +17,7 @@ public class BandMemberController : ControllerBase
 
     // Gets all band member records for a Single band ~Bailey
     [HttpGet("GetAllBandMembers/{bandId}")]
-    public async Task<List<BandMember>> GetAll(int bandId)
+    public async Task<List<User>> GetAll(int bandId)
     {
         return await _dl.GetAllBandMembers(bandId);
     }

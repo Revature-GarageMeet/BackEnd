@@ -253,12 +253,21 @@ public class DatabaseCalls : DBInterface
     }
 
     // Gets all members for a single Band ~Bailey
-    public async Task<List<BandMember>> GetAllBandMembers(int bandId)
+    public async Task<List<User>> GetAllBandMembers(int bandId)
     {
-        return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
+        List<User> bandMemUsers = new List<User>();
+        List<BandMember> bandMem = new List<BandMember>();
+
+        bandMem = await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
+        foreach (BandMember mem in bandMem)
+        {
+            bandMemUsers.Add(await _context.Users.FirstOrDefaultAsync(user => user.id == mem.userId));
+        }
+        return bandMemUsers;
     }
 
-    public async Task<BandMember> GetBandMember(int userId) {
+    public async Task<BandMember> GetBandMember(int userId)
+    {
         return await _context.BandMembers.FirstOrDefaultAsync(bandmem => bandmem.userId == userId);
     }
 
@@ -279,8 +288,14 @@ public class DatabaseCalls : DBInterface
         await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> IsInABand(int userId) {
+    public async Task<bool> IsInABand(int userId)
+    {
         return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
+    }
+
+    public async Task<Band> GetBandDetails(string bandTitle)
+    {
+        return await _context.Bands.FirstOrDefaultAsync(band => band.title == bandTitle);
     }
 
     // not implemented

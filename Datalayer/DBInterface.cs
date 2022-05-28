@@ -121,13 +121,15 @@ namespace Datalayer
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns></returns>
+        
+        Task<Band> GetBandDetails(string bandTitle);
 
         /// <summary>
         /// Gets every bandmember that is apart of a specific Band
         /// </summary>
         /// <param name="bandId">Unique id attached to a band</param>
         /// <returns>List of every bandmember record attached to a specific bandId</returns>
-        Task<List<BandMember>> GetAllBandMembers(int bandId);
+        Task<List<User>> GetAllBandMembers(int bandId);
         /// <summary>
         /// Gets the bandId attached to the bandmember that is being checked
         /// </summary>

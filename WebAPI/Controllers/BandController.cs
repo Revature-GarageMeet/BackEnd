@@ -22,6 +22,12 @@ namespace WebAPI.Controllers
             return await _db.GetAllBandNames(bandId);
         }
 
+        [HttpGet("GetBandDetails/{bandTitle}")]
+        public async Task<Band> GetBandDetails(string bandTitle)
+        {
+            return await _db.GetBandDetails(bandTitle);
+        }
+
         // GET api/<BandController>/5
         [HttpGet("GetBands")]
         public async Task<List<Band>> GetAllBandDetails()
