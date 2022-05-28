@@ -57,9 +57,10 @@ namespace WebAPI.Controllers
         }
 
         // DELETE api/<BandController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("RemoveBand/{bandId}")]
+        public async Task Delete(int bandId)
         {
+            await _db.DeleteBand(bandId);
         }
     }
 }

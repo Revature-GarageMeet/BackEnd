@@ -250,13 +250,10 @@ public class DatabaseCalls : DBInterface
         return await _context.Bands!.ToListAsync();
     }
 
-    public async Task DeleteBand(Band bandToDelete)
-    {
-        _context.Bands.Remove(bandToDelete);
-        await _context.SaveChangesAsync();
-    }
     public async Task DeleteBand(int bandId)
     {
+        Band tempBand = await _context.Bands.FirstOrDefaultAsync(band => band.id == bandId);
+        _context.Bands.Remove(tempBand);
         await _context.SaveChangesAsync();
     }
 
