@@ -22,14 +22,15 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
-        Task<User> updateUser(User user);
         Task<Boolean> checkExisting(string username);
+        Task<User> updateUser(User user);
         /// <summary>
         /// Returns if username and password match
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
         Task<Boolean> authenticateUser(User user);
+        Task<User> otherProfileInfo(int userId);
 
 
         //************************************************ Post Related things ************************************************ 
@@ -121,7 +122,7 @@ namespace Datalayer
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns></returns>
-        
+
         Task<Band> GetBandDetails(string bandTitle);
 
         /// <summary>

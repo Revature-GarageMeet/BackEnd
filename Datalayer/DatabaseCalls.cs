@@ -34,6 +34,14 @@ public class DatabaseCalls : DBInterface
         return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
     }
 
+    public async Task<User> otherProfileInfo(int userId)
+    {
+        User user = await _context.Users.FirstOrDefaultAsync(user => user.id == userId);
+        user.password = "";
+        user.email = "";
+        return user;
+    }
+
     public async Task<User> updateUser(User auth)
     {
         User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
