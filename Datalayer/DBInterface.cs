@@ -133,7 +133,7 @@ namespace Datalayer
         /// </summary>
         /// <param name="userId">The userid of the user being checked to find bandmember record</param>
         /// <returns>The bandId for a specific bandmember</returns>
-        Task<int> GetBandMemberBandId(int userId);
+        Task<BandMember> GetBandMember(int userId);
         /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
         /// </summary>

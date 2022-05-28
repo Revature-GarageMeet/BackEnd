@@ -22,9 +22,9 @@ public class BandMemberController : ControllerBase
         return await _dl.GetAllBandMembers(bandId);
     }
 
-    [HttpGet("GetBandMemberBandId/{userId}")]
-    public async Task<int> GetBandMemberBandId(int userId) {
-        return await _dl.GetBandMemberBandId(userId);
+    [HttpGet("GetBandMember/{userId}")]
+    public async Task<BandMember> GetBandMemberByUserId(int userId) {
+        return await _dl.GetBandMember(userId);
     }
 
     [HttpGet("IsInABand/{userId}")]
