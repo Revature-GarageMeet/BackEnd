@@ -29,6 +29,13 @@ namespace WebAPI.Controllers
             return await _db.GetAllBands();
         }
 
+        [HttpGet("GetBandMemLimit/{bandId}")]
+        public async Task<int> GetBandMemberLimit(int bandId)
+        {
+            Band band = await _db.GetMemberLimit(bandId);
+            return band.memberLimit;
+        }
+
         // POST api/<BandController>
         [HttpPost]
         public async Task<Band> Post(Band newBand)

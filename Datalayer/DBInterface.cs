@@ -140,6 +140,12 @@ namespace Datalayer
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
         Task RemoveBandMember(BandMember memberToDelete);
         /// <summary>
+        /// Checks to see if the user is already in a band or not
+        /// </summary>
+        /// <param name="userId">Unique id of the user being checked</param>
+        /// <returns>A boolean value if true or false</returns>
+        Task<bool> IsInABand(int userId);
+        /// <summary>
         /// Gets a list of band names
         /// </summary>
         /// <param name="bandId"></param>
@@ -151,5 +157,11 @@ namespace Datalayer
         /// <returns>List containing every Band record</returns>
         Task<List<Band>> GetAllBands();
         Task UpdateBand(Band changeBand);
+        /// <summary>
+        /// Gets the member limit for a specified band
+        /// </summary>
+        /// <param name="bandId">The band id that we are getting the member limit of</param>
+        /// <returns>The member limit value</returns>
+        Task<Band> GetMemberLimit(int bandId);
     }
 }

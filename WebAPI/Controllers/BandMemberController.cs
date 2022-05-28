@@ -22,6 +22,11 @@ public class BandMemberController : ControllerBase
         return await _dl.GetAllBandMembers(bandId);
     }
 
+    [HttpGet("IsInABand/{userId}")]
+    public async Task<bool> GetIfInBand(int userId) {
+        return await _dl.IsInABand(userId);
+    }
+
     // Adds a new band member record to the Database
     [HttpPost("AddBandMember")]
     public async Task<BandMember> Post(BandMember newMember)

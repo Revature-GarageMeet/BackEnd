@@ -220,6 +220,11 @@ public class DatabaseCalls : DBInterface
         return newBand;
     }
 
+    public async Task<Band> GetMemberLimit(int bandId)
+    {
+        return await _context.Bands.FirstOrDefaultAsync(band => band.id == bandId);
+    }
+
     public async Task UpdateBand(Band changeBand)
     {
         _context.Bands.Update(changeBand);
@@ -269,6 +274,11 @@ public class DatabaseCalls : DBInterface
         _context.BandMembers.Remove(memberToDelete);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<bool> IsInABand(int userId) {
+        return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
+    }
+
     // not implemented
     public async Task<List<string>> GetAllBandNames(int bandId)
     {
