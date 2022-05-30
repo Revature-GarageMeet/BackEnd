@@ -116,6 +116,8 @@ namespace Datalayer
         /// <param name="bandId"></param>
         /// <returns>A list of band names </return>
 
+        Task<bool> CheckIfBandExists(string bandTitle);
+
         Task DeleteBand(int bandId);
         /// <summary>
         /// Deletes a band

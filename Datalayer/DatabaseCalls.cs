@@ -299,6 +299,10 @@ public class DatabaseCalls : DBInterface
         return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
     }
 
+    public async Task<bool> CheckIfBandExists(string bandTitle) {
+        return await _context.Bands.AnyAsync(band => band.title == bandTitle);
+    }
+
     public async Task<Band> GetBandDetails(string bandTitle)
     {
         return await _context.Bands.FirstOrDefaultAsync(band => band.title == bandTitle);

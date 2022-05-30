@@ -22,6 +22,11 @@ namespace WebAPI.Controllers
             return await _db.GetAllBandNames(bandId);
         }
 
+        [HttpGet("CheckIfExists/{bandTitle}")]
+        public async Task<bool> CheckIfNameIsTaken(string bandTitle) {
+            return await _db.CheckIfBandExists(bandTitle);
+        }
+
         [HttpGet("GetBandDetails/{bandTitle}")]
         public async Task<Band> GetBandDetails(string bandTitle)
         {
