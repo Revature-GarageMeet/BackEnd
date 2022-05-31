@@ -22,14 +22,15 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if exists, False if doesn't</returns>
-        Task<User> updateUser(User user);
         Task<Boolean> checkExisting(string username);
+        Task<User> updateUser(User user);
         /// <summary>
         /// Returns if username and password match
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
         Task<Boolean> authenticateUser(User user);
+        Task<User> otherProfileInfo(int userId);
 
 
         //************************************************ Post Related things ************************************************ 
@@ -51,8 +52,9 @@ namespace Datalayer
         /// Returns all posts from a band's id
         /// </summary>
         Task<List<Post>> getPostbyBandIdAsync(int bandId);
+        
         /// <summary>
-        /// Posts for a band's Id
+        /// Posts of a band's Id
         /// </summary>
         Task postForBandAsync(int bandId, string textEntry, string postType);
         /// <summary>
@@ -69,7 +71,7 @@ namespace Datalayer
         Task LikePostAsync(int postId, int user);
         Task UnlikePostAsync(int postId, int user);
         Task<int> GetPostLikesAsync(int postId);
-        Task<List<LikedPosts>>GetUserLikesAsync(int userId);
+        Task<List<LikedPosts>> GetUserLikesAsync(int userId);
 
         Task<List<Post>> getAllPosts();
 
@@ -117,6 +119,8 @@ namespace Datalayer
         /// <param name="bandId"></param>
         /// <returns>A list of band names </return>
 
+        Task<bool> CheckIfBandExists(string bandTitle);
+
         Task DeleteBand(int bandId);
         /// <summary>
         /// Deletes a band
@@ -124,8 +128,20 @@ namespace Datalayer
         /// <param name="bandId"></param>
         /// <returns></returns>
 
+        Task<Band> GetBandDetails(string bandTitle);
 
-        Task<List<BandMember>> GetAllBandMembers(int bandId);
+        /// <summary>
+        /// Gets every bandmember that is apart of a specific Band
+        /// </summary>
+        /// <param name="bandId">Unique id attached to a band</param>
+        /// <returns>List of every bandmember record attached to a specific bandId</returns>
+        Task<List<User>> GetAllBandMembers(int bandId);
+        /// <summary>
+        /// Gets the bandId attached to the bandmember that is being checked
+        /// </summary>
+        /// <param name="userId">The userid of the user being checked to find bandmember record</param>
+        /// <returns>The bandId for a specific bandmember</returns>
+        Task<BandMember> GetBandMember(int userId);
         /// <summary>
         /// Adds a new BandMember record to the BandMember DB Table ~Bailey
         /// </summary>
@@ -136,12 +152,30 @@ namespace Datalayer
         /// Removes a BandMember record from the BandMember DB Table ~Bailey
         /// </summary>
         /// <param name="memberToDelete">A BandMember object to be used for record removal</param>
-        Task RemoveBandMember(BandMember memberToDelete);
+        Task RemoveBandMember(int bandMemId);
+        /// <summary>
+        /// Checks to see if the user is already in a band or not
+        /// </summary>
+        /// <param name="userId">Unique id of the user being checked</param>
+        /// <returns>A boolean value if true or false</returns>
+        Task<bool> IsInABand(int userId);
         /// <summary>
         /// Gets a list of band names
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns></returns>
         Task<List<string>> GetAllBandNames(int bandId);
+        /// <summary>
+        /// Gets all band records in the database
+        /// </summary>
+        /// <returns>List containing every Band record</returns>
+        Task<List<Band>> GetAllBands();
+        Task UpdateBand(Band changeBand);
+        /// <summary>
+        /// Gets the member limit for a specified band
+        /// </summary>
+        /// <param name="bandId">The band id that we are getting the member limit of</param>
+        /// <returns>The member limit value</returns>
+        Task<Band> GetMemberLimit(int bandId);
     }
 }

@@ -34,6 +34,14 @@ public class DatabaseCalls : DBInterface
         return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
     }
 
+    public async Task<User> otherProfileInfo(int userId)
+    {
+        User user = await _context.Users.FirstOrDefaultAsync(user => user.id == userId);
+        user.password = "";
+        user.email = "";
+        return user;
+    }
+
     public async Task<User> updateUser(User auth)
     {
         User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
@@ -53,6 +61,14 @@ public class DatabaseCalls : DBInterface
     {
         return await _context.Posts.ToListAsync();
     }
+
+
+    // public async Task postForBandAsync(int bandId, string textEntry, string postType)
+    // {
+    //     Post post = new Post() { entry = textEntry, bandId = bandId, type = postType };
+    //     _context.Posts.Add(post);
+    //     await _context.SaveChangesAsync();
+    // }
 
     public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {
@@ -76,12 +92,12 @@ public class DatabaseCalls : DBInterface
 
     public async Task LikePostAsync(int postId, int userId)
     {
-    
+
         // might not work, just put it here for now. Also allows for inifite likes
-        
+
         LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
-        
-        if(testPost == null) 
+
+        if (testPost == null)
         {
             testPost = new LikedPosts()
             {
@@ -97,9 +113,9 @@ public class DatabaseCalls : DBInterface
             Console.WriteLine($"Un-Liking the Post");
             // _context.LikedPosts.Update(_context.LikedPosts.Remove(testPost));
             _context.LikedPosts.Remove(testPost);
-            
+
             await _context.SaveChangesAsync();
-            
+
             // try
             // {
             // _context.LikedPosts.Remove(testPost);
@@ -108,17 +124,17 @@ public class DatabaseCalls : DBInterface
             // }
             // catch(DbUpdateConcurrencyException ex)
             // {
-                
+
             //     throw new Exception("Record does not exist in the database: " + ex.Message);
             // }
             // catch(Exception ex)
             // {
             //     throw;
             // }
-            
+
         }
-        
-        
+
+
         // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
         // if (temp != null)
         // {
@@ -129,7 +145,7 @@ public class DatabaseCalls : DBInterface
         // await _context.SaveChangesAsync();
     }
 
-    public async Task UnlikePostAsync(int postId, int userId )
+    public async Task UnlikePostAsync(int postId, int userId)
     {
         //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
         LikedPosts temp = await _context.LikedPosts.FirstOrDefaultAsync(t => t.postid == postId && t.userid == userId);
@@ -147,7 +163,7 @@ public class DatabaseCalls : DBInterface
         return postLikes;
     }
 
-    public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
+    public async Task<List<LikedPosts>> GetUserLikesAsync(int userId)
     {
         return await _context.LikedPosts.AsNoTracking().Where(t => t.userid == userId).ToListAsync();
     }
@@ -224,25 +240,52 @@ public class DatabaseCalls : DBInterface
         return newBand;
     }
 
+    public async Task<Band> GetMemberLimit(int bandId)
+    {
+        return await _context.Bands.FirstOrDefaultAsync(band => band.id == bandId);
+    }
+
+    public async Task UpdateBand(Band changeBand)
+    {
+        _context.Bands.Update(changeBand);
+        await _context.SaveChangesAsync();
+        _context.ChangeTracker.Clear();
+    }
+
     public async Task<List<Band>> GetBands(int bandId)
     {
         return await _context.Bands.FromSqlRaw($"Select * From Band Where Bands.bandId = {bandId}").ToListAsync();
     }
 
-    public async Task DeleteBand(Band bandToDelete)
+    public async Task<List<Band>> GetAllBands()
     {
-        _context.Bands.Remove(bandToDelete);
-        await _context.SaveChangesAsync();
+        return await _context.Bands!.ToListAsync();
     }
+
     public async Task DeleteBand(int bandId)
     {
+        Band tempBand = await _context.Bands.FirstOrDefaultAsync(band => band.id == bandId);
+        _context.Bands.Remove(tempBand);
         await _context.SaveChangesAsync();
     }
 
     // Gets all members for a single Band ~Bailey
-    public async Task<List<BandMember>> GetAllBandMembers(int bandId)
+    public async Task<List<User>> GetAllBandMembers(int bandId)
     {
-        return await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
+        List<User> bandMemUsers = new List<User>();
+        List<BandMember> bandMem = new List<BandMember>();
+
+        bandMem = await _context.BandMembers.FromSqlRaw($"Select * From BandMembers Where BandMembers.bandId = {bandId}").ToListAsync();
+        foreach (BandMember mem in bandMem)
+        {
+            bandMemUsers.Add(await _context.Users.FirstOrDefaultAsync(user => user.id == mem.userId));
+        }
+        return bandMemUsers;
+    }
+
+    public async Task<BandMember> GetBandMember(int userId)
+    {
+        return await _context.BandMembers.FirstOrDefaultAsync(bandmem => bandmem.userId == userId);
     }
 
     //Note to me(Arrion) don't forget band limit
@@ -256,11 +299,27 @@ public class DatabaseCalls : DBInterface
     }
 
     // Removes a member from the database ~Bailey
-    public async Task RemoveBandMember(BandMember memberToDelete)
+    public async Task RemoveBandMember(int bandMemId)
     {
-        _context.BandMembers.Remove(memberToDelete);
+        BandMember tempBandMem = await _context.BandMembers.FirstOrDefaultAsync(bandmem => bandmem.id == bandMemId);
+        _context.BandMembers.Remove(tempBandMem);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<bool> IsInABand(int userId)
+    {
+        return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
+    }
+
+    public async Task<bool> CheckIfBandExists(string bandTitle) {
+        return await _context.Bands.AnyAsync(band => band.title == bandTitle);
+    }
+
+    public async Task<Band> GetBandDetails(string bandTitle)
+    {
+        return await _context.Bands.FirstOrDefaultAsync(band => band.title == bandTitle);
+    }
+
     // not implemented
     public async Task<List<string>> GetAllBandNames(int bandId)
     {
@@ -280,7 +339,7 @@ public class DatabaseCalls : DBInterface
 
     #region Getting Posts
 
-    public async Task<Post> GetPostByPostID( int postID)
+    public async Task<Post> GetPostByPostID(int postID)
     {
         Post tempPost = await _context.Posts.FirstOrDefaultAsync(_post => _post.id == postID);
         tempPost.likes = await GetPostLikesAsync(postID);
@@ -289,18 +348,18 @@ public class DatabaseCalls : DBInterface
 
     public async Task<List<Post>> GetPostsByUserAsync(User user)
     {
-         List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
-         foreach(Post _post in temp)
-         {
-             _post.likes = await GetPostLikesAsync(_post.id);
-         }
-        
+        List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {user.id}").ToListAsync();
+        foreach (Post _post in temp)
+        {
+            _post.likes = await GetPostLikesAsync(_post.id);
+        }
+
         return temp;
     }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
-        List<Post> temp =  await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
-        foreach(Post _post in temp)
+        List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
+        foreach (Post _post in temp)
         {
             _post.likes = await GetPostLikesAsync(_post.id);
         }
@@ -310,7 +369,7 @@ public class DatabaseCalls : DBInterface
     public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
     {
         List<Post> temp = await _context.Posts.AsNoTracking().Where(post => post.bandId == bandId).ToListAsync();
-        foreach(Post _post in temp)
+        foreach (Post _post in temp)
         {
             _post.likes = await GetPostLikesAsync(_post.id);
         }
@@ -323,9 +382,6 @@ public class DatabaseCalls : DBInterface
     #region  
 
     #endregion
-
-
-
 }
 
 

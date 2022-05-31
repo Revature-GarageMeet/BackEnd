@@ -29,6 +29,12 @@ public class UserController : ControllerBase
         return await _db.checkExisting(username);
     }
 
+    [HttpGet("OtherUserProfile/{userId}")]
+    public async Task<User> otherUserProfileInfo(int userId)
+    {
+        return await _db.otherProfileInfo(userId);
+    }
+
     [HttpPost]
     public async Task<User> createUser(User user)
     {
