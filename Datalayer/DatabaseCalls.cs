@@ -49,6 +49,10 @@ public class DatabaseCalls : DBInterface
 
     //************************************************ Post Related Things ************************************************
     
+    public async Task<List<Post>> getAllPosts()
+    {
+        return await _context.Posts.ToListAsync();
+    }
 
     public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {

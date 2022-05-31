@@ -97,6 +97,12 @@ public class PostController : ControllerBase
     {
         return await _db.GetPostLikesAsync(postId);
     }
+
+    [HttpGet("GetAllPosts")]
+    public async Task<List<Post>> GetAllPosts()
+    {
+        return await _db.getAllPosts();
+    }
     
     [HttpDelete("UnlikePost/{postId}/{userId}")]
     public async Task UnlikePostAsyinc(int postId, int userId)

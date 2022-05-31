@@ -67,9 +67,11 @@ namespace Datalayer
         /// Like post, not sure how this should really be done - maybe we really do need a like table????
         /// </summary>
         Task LikePostAsync(int postId, int user);
-Task UnlikePostAsync(int postId, int user);
+        Task UnlikePostAsync(int postId, int user);
         Task<int> GetPostLikesAsync(int postId);
         Task<List<LikedPosts>>GetUserLikesAsync(int userId);
+
+        Task<List<Post>> getAllPosts();
 
         Task deletePostAsync(int postId);
         /// <summary>
