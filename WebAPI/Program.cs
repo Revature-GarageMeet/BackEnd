@@ -22,11 +22,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
                     {
-                        policy.WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876, http://localhost:4201")
-                            .AllowAnyHeader()
+                        policy
                             .AllowAnyMethod()
-                            .AllowAnyOrigin();
-                            //.AllowCredentials();
+                            .AllowAnyHeader()
+                            .WithOrigins("http://localhost:4200, http://localhost:5205, http://localhost:9876, http://localhost:4201")
+                            //.AllowAnyOrigin()
+                            .AllowCredentials();
                     });
 });
 
@@ -44,7 +45,7 @@ builder.Services.AddDbContext<GMDBContext>(options => options.UseSqlServer(build
 builder.Services.AddScoped<DBInterface, DatabaseCalls>();
 
 var app = builder.Build();
-app.MapHub<MessageHub>("/chatsocket");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -54,14 +55,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
-
-app.UseAuthorization();
-
-app.MapControllers();
-
 app.UseRouting();
-/*Adds the map hub
+app.UseCors(MyAllowSpecificOrigins);
+app.UseAuthorization();
+//app.MapHub<MessageHub>("/chatsocket");
+//app.MapControllers();
+//app.UseEndpoints.MapHub<MessageHub>("/chatsocket");
+
+
+//Adds the map hub
 //app.MapHub<MessageHub>("../Datalayer");
 app.UseEndpoints(endpoints =>
     {
@@ -69,5 +71,5 @@ app.UseEndpoints(endpoints =>
         
         endpoints.MapHub<MessageHub>("/chatsocket");
     });
-*/
+
 app.Run();

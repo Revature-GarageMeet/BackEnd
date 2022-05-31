@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
 
-namespace Hubs 
+namespace Hubs;
+public class MessageHub : Hub
 {
-    public class MessageHub:Hub
+    // Method that sends the message to everyone connected to this hub
+    public async Task SendMessage(string username, string message)
     {
-        public async Task NewMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("MessageReceived", user, message);
-        }
+        // Will only pass in username and message
+        await Clients.All.SendAsync("MessageReceived", username, message);
     }
 }
