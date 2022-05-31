@@ -57,6 +57,11 @@ public class DatabaseCalls : DBInterface
 
     //************************************************ Post Related Things ************************************************
 
+    public async Task<List<Post>> getAllPosts()
+    {
+        return await _context.Posts.ToListAsync();
+    }
+
 
     // public async Task postForBandAsync(int bandId, string textEntry, string postType)
     // {
@@ -313,7 +318,8 @@ public class DatabaseCalls : DBInterface
         return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
     }
 
-    public async Task<bool> CheckIfBandExists(string bandTitle) {
+    public async Task<bool> CheckIfBandExists(string bandTitle)
+    {
         return await _context.Bands.AnyAsync(band => band.title == bandTitle);
     }
 
@@ -384,9 +390,6 @@ public class DatabaseCalls : DBInterface
     #region  
 
     #endregion
-
-
-
 }
 
 
