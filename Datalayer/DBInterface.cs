@@ -53,7 +53,11 @@ namespace Datalayer
         /// </summary>
         Task<List<Post>> getPostbyBandIdAsync(int bandId);
         /// <summary>
-        /// Posts for a band's Id
+        /// Posts for a specific band's Id attached to a user
+        /// </summary>
+        Task postForBandAsync(int bandId, string textEntry, int userID);
+        /// <summary>
+        /// Posts of a band's Id
         /// </summary>
         Task postForBandAsync(int bandId, string textEntry, string postType);
         /// <summary>

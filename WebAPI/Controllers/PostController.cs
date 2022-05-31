@@ -59,6 +59,13 @@ public class PostController : ControllerBase
         return await _db.getPostbyBandIdAsync(bandId);
     }
 
+    [HttpPost("PostForBandMembers/{bandId}/{textEntry}/{userID}")]
+    public async Task postForBand(int bandId, string textEntry, int userID)
+    {
+        // We could specify the user later
+        await _db.postForBandAsync(bandId, textEntry, userID);
+    }
+
     [HttpPost("PostForBand/{bandId}/{textEntry}/{postType}")]
     public async Task postForBand(int bandId, string textEntry, string postType)
     {

@@ -58,6 +58,20 @@ public class DatabaseCalls : DBInterface
     //************************************************ Post Related Things ************************************************
 
 
+    // public async Task postForBandAsync(int bandId, string textEntry, string postType)
+    // {
+    //     Post post = new Post() { entry = textEntry, bandId = bandId, type = postType };
+    //     _context.Posts.Add(post);
+    //     await _context.SaveChangesAsync();
+    // }
+
+    public async Task postForBandAsync(int bandId, string textEntry, int userID)
+    {
+        Post post = new Post() { entry = textEntry, bandId = bandId, userId = userID };
+        _context.Posts.Add(post);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {
         Post post = new Post() { entry = textEntry, bandId = bandId, type = postType };
