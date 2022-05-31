@@ -65,9 +65,9 @@ public class DatabaseCalls : DBInterface
     //     await _context.SaveChangesAsync();
     // }
 
-    public async Task postForBandAsync(int bandId, string textEntry, int userID)
+    public async Task postForBandMemsAsync(int bandId, string textEntry, int userID, string postType)
     {
-        Post post = new Post() { entry = textEntry, bandId = bandId, userId = userID };
+        Post post = new Post() { entry = textEntry, bandId = bandId, userId = userID, type = postType };
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
