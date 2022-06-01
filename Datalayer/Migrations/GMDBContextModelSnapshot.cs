@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Diagnostics.CodeAnalysis;
 
 #nullable disable
 
 namespace Datalayer.Migrations
 {
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(GMDBContext))]
     partial class GMDBContextModelSnapshot : ModelSnapshot
     {

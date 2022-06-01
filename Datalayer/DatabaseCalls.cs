@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 namespace Datalayer;
+using System.Diagnostics.CodeAnalysis;
+
 
 
 public class DatabaseCalls : DBInterface
@@ -29,10 +31,10 @@ public class DatabaseCalls : DBInterface
     {
         return await _context.Users.AnyAsync(user => user.username == auth);
     }
-    public async Task<Boolean> authenticateUser(string authUser, string authPass)
-    {
-        return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
-    }
+    // public async Task<Boolean> authenticateUser(string authUser, string authPass)
+    // {
+    //     return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
+    // }
 
     public async Task<User> otherProfileInfo(int userId)
     {
@@ -45,22 +47,16 @@ public class DatabaseCalls : DBInterface
     public async Task<User> updateUser(User auth)
     {
         User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
-        Console.WriteLine(temp.bio);
         temp.firstname = auth.firstname;
         temp.lastname = auth.lastname;
         temp.bio = auth.bio;
         await _context.SaveChangesAsync();
-
-        Console.WriteLine(auth.bio);
         return temp;
     }
 
     //************************************************ Post Related Things ************************************************
+
     
-    public async Task<List<Post>> getAllPosts()
-    {
-        return await _context.Posts.ToListAsync();
-    }
 
 
     // public async Task postForBandAsync(int bandId, string textEntry, string postType)
@@ -69,6 +65,13 @@ public class DatabaseCalls : DBInterface
     //     _context.Posts.Add(post);
     //     await _context.SaveChangesAsync();
     // }
+
+    public async Task postForBandMemsAsync(int bandId, string textEntry, int userID, string postType)
+    {
+        Post post = new Post() { entry = textEntry, bandId = bandId, userId = userID, type = postType };
+        _context.Posts.Add(post);
+        await _context.SaveChangesAsync();
+    }
 
     public async Task postForBandAsync(int bandId, string textEntry, string postType)
     {
@@ -95,7 +98,7 @@ public class DatabaseCalls : DBInterface
 
         // might not work, just put it here for now. Also allows for inifite likes
 
-        LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
+        LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).FirstOrDefaultAsync();
 
         if (testPost == null)
         {
@@ -157,17 +160,17 @@ public class DatabaseCalls : DBInterface
     }
 
 
-    public async Task<int> GetPostLikesAsync(int postId)
-    {
-        int postLikes = await _context.LikedPosts.CountAsync(t => t.postid == postId);
-        return postLikes;
-    }
+    
 
     public async Task<List<LikedPosts>> GetUserLikesAsync(int userId)
     {
         return await _context.LikedPosts.AsNoTracking().Where(t => t.userid == userId).ToListAsync();
     }
 
+    public async Task<bool> CheckIfLiked(int postId, int userId)
+    {
+        return await _context.LikedPosts.AnyAsync(liked => liked.postid == postId && liked.userid == userId);
+    }
 
 
 
@@ -311,7 +314,8 @@ public class DatabaseCalls : DBInterface
         return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
     }
 
-    public async Task<bool> CheckIfBandExists(string bandTitle) {
+    public async Task<bool> CheckIfBandExists(string bandTitle)
+    {
         return await _context.Bands.AnyAsync(band => band.title == bandTitle);
     }
 
@@ -356,6 +360,17 @@ public class DatabaseCalls : DBInterface
 
         return temp;
     }
+
+    public async Task<List<Post>> getAllPosts()
+    {
+        List<Post> temp = await _context.Posts.ToListAsync();
+        
+        foreach (Post _post in temp)
+        {
+            _post.likes = await GetPostLikesAsync(_post.id);
+        }
+        return temp; 
+    }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
         List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
@@ -365,6 +380,13 @@ public class DatabaseCalls : DBInterface
         }
         return temp;
     }
+
+    public async Task<int> GetPostLikesAsync(int postId)
+    {
+        int postLikes = await _context.LikedPosts.CountAsync(t => t.postid == postId);
+        return postLikes;
+    }
+    
 
     public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
     {
