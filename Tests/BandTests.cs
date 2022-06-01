@@ -23,18 +23,18 @@ namespace Datalayer
             return new Band();
         }
 
-        [Fact]
-        public void TestMethod1()
-        {
-            // Arrange
-            var band = this.CreateBand();
+        // [Fact]
+        // public void TestMethod1()
+        // {
+        //     // Arrange
+        //     var band = this.CreateBand();
 
-            // Act
+        //     // Act
 
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
+        //     // Assert
+        //     Assert.True(false);
+        //     this.mockRepository.VerifyAll();
+        // }
     }
 }

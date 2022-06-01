@@ -13,8 +13,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(GMDBContext))]
-    [Migration("20220527160447_initial")]
-    partial class initial
+    [Migration("20220527234143_AddshowComments")]
+    partial class AddshowComments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,6 +137,9 @@ namespace Datalayer.Migrations
 
                     b.Property<int>("likes")
                         .HasColumnType("int");
+
+                    b.Property<bool>("showComments")
+                        .HasColumnType("bit");
 
                     b.Property<string>("type")
                         .HasColumnType("nvarchar(max)");

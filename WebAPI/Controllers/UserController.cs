@@ -17,16 +17,22 @@ public class UserController : ControllerBase
         return await _db.loginUser(user);
     }
 
-    [HttpGet("Authenticate")]
-    public async Task<Boolean> authenticate(User user)
-    {
-        return await _db.authenticateUser(user);
-    }
+    // [HttpGet("Authenticate")]
+    // public async Task<Boolean> authenticate(User user)
+    // {
+    //     return await _db.authenticateUser(user);
+    // }
 
     [HttpGet("Existing/{username}")]
     public async Task<Boolean> existing(string username)
     {
         return await _db.checkExisting(username);
+    }
+
+    [HttpGet("OtherUserProfile/{userId}")]
+    public async Task<User> otherUserProfileInfo(int userId)
+    {
+        return await _db.otherProfileInfo(userId);
     }
 
     [HttpPost]

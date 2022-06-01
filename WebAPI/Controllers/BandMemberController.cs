@@ -17,9 +17,19 @@ public class BandMemberController : ControllerBase
 
     // Gets all band member records for a Single band ~Bailey
     [HttpGet("GetAllBandMembers/{bandId}")]
-    public async Task<List<BandMember>> GetAll(int bandId)
+    public async Task<List<User>> GetAll(int bandId)
     {
         return await _dl.GetAllBandMembers(bandId);
+    }
+
+    [HttpGet("GetBandMember/{userId}")]
+    public async Task<BandMember> GetBandMemberByUserId(int userId) {
+        return await _dl.GetBandMember(userId);
+    }
+
+    [HttpGet("IsInABand/{userId}")]
+    public async Task<bool> GetIfInBand(int userId) {
+        return await _dl.IsInABand(userId);
     }
 
     // Adds a new band member record to the Database
@@ -31,10 +41,10 @@ public class BandMemberController : ControllerBase
     }
 
     // Removes a band member record from the database
-    [HttpDelete("RemoveBandMember")]
-    public async Task Delete(BandMember memberToDelete)
+    [HttpDelete("RemoveBandMember/{bandMemId}")]
+    public async Task Delete(int bandMemId)
     {
-        await _dl.RemoveBandMember(memberToDelete);
+        await _dl.RemoveBandMember(bandMemId);
     }
 
 }

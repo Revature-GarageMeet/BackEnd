@@ -4,7 +4,7 @@
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BandController : ControllerBase
     {
@@ -22,29 +22,50 @@ namespace WebAPI.Controllers
             return await _db.GetAllBandNames(bandId);
         }
 
-        // GET api/<BandController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("CheckIfExists/{bandTitle}")]
+        public async Task<bool> CheckIfNameIsTaken(string bandTitle) {
+            return await _db.CheckIfBandExists(bandTitle);
+        }
+
+        [HttpGet("GetBandDetails/{bandTitle}")]
+        public async Task<Band> GetBandDetails(string bandTitle)
         {
-            return "value";
+            return await _db.GetBandDetails(bandTitle);
+        }
+
+        // GET api/<BandController>/5
+        [HttpGet("GetBands")]
+        public async Task<List<Band>> GetAllBandDetails()
+        {
+            return await _db.GetAllBands();
+        }
+
+        [HttpGet("GetBandMemLimit/{bandId}")]
+        public async Task<int> GetBandMemberLimit(int bandId)
+        {
+            Band band = await _db.GetMemberLimit(bandId);
+            return band.memberLimit;
         }
 
         // POST api/<BandController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Band> Post(Band newBand)
         {
+            return await _db.CreateBand(newBand);
         }
 
         // PUT api/<BandController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task Put(Band changeBand)
         {
+            await _db.UpdateBand(changeBand);
         }
 
         // DELETE api/<BandController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("RemoveBand/{bandId}")]
+        public async Task Delete(int bandId)
         {
+            await _db.DeleteBand(bandId);
         }
     }
 }

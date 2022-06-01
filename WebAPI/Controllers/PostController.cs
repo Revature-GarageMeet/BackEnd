@@ -59,6 +59,13 @@ public class PostController : ControllerBase
         return await _db.getPostbyBandIdAsync(bandId);
     }
 
+    [HttpPost("PostForBandMembers/{bandId}/{textEntry}/{userID}/{postType}")]
+    public async Task postForBand(int bandId, string textEntry, int userID, string postType)
+    {
+        // We could specify the user later
+        await _db.postForBandMemsAsync(bandId, textEntry, userID, postType);
+    }
+
     [HttpPost("PostForBand/{bandId}/{textEntry}/{postType}")]
     public async Task postForBand(int bandId, string textEntry, string postType)
     {
@@ -80,7 +87,7 @@ public class PostController : ControllerBase
     }
 
     [HttpGet("GetLikes/{userId}")]
-    public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
+    public async Task<List<LikedPosts>> GetUserLikesAsync(int userId)
     {
         return await _db.GetUserLikesAsync(userId);
     }
@@ -90,14 +97,25 @@ public class PostController : ControllerBase
     {
         await _db.LikePostAsync(postId, userId);
     }
-    
+
+    [HttpGet("VerifyIfLiked/{postId}/{userId}")]
+    public async Task<bool> verifyIfLiked(int postId, int userId) 
+    {
+        return await _db.CheckIfLiked(postId, userId);
+    }
 
     [HttpGet("GetPostLikes/{postId}")]
     public async Task<int> GetPostLikesAsync(int postId)
     {
         return await _db.GetPostLikesAsync(postId);
     }
-    
+
+    [HttpGet("GetAllPosts")]
+    public async Task<List<Post>> GetAllPosts()
+    {
+        return await _db.getAllPosts();
+    }
+
     [HttpDelete("UnlikePost/{postId}/{userId}")]
     public async Task UnlikePostAsyinc(int postId, int userId)
     {
