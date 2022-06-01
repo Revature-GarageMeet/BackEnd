@@ -56,6 +56,7 @@ namespace Datalayer
         /// Posts for a specific band's Id attached to a user
         /// </summary>
         Task postForBandMemsAsync(int bandId, string textEntry, int userID, string postType);
+
         /// <summary>
         /// Posts of a band's Id
         /// </summary>
@@ -76,6 +77,8 @@ namespace Datalayer
         Task<int> GetPostLikesAsync(int postId);
         Task<List<LikedPosts>> GetUserLikesAsync(int userId);
         Task<bool> CheckIfLiked(int postId, int userId);
+
+        Task<List<Post>> getAllPosts();
 
         Task deletePostAsync(int postId);
         /// <summary>

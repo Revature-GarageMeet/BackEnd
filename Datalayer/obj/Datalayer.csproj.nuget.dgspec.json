@@ -1,28 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {}
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj": {
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj",
         "projectName": "Datalayer",
-        "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
-        "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\obj\\",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Bailey\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -35,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj"
+              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj"
               }
             }
           }
@@ -91,25 +84,18 @@
         }
       }
     },
-    "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
+    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\obj\\",
+        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Bailey\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
