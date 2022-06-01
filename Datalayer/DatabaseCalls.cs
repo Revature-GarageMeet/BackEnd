@@ -31,10 +31,10 @@ public class DatabaseCalls : DBInterface
     {
         return await _context.Users.AnyAsync(user => user.username == auth);
     }
-    public async Task<Boolean> authenticateUser(string authUser, string authPass)
-    {
-        return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
-    }
+    // public async Task<Boolean> authenticateUser(string authUser, string authPass)
+    // {
+    //     return await _context.Users.AnyAsync(user => user.username == authUser && user.password == authPass);
+    // }
 
     public async Task<User> otherProfileInfo(int userId)
     {
@@ -47,13 +47,10 @@ public class DatabaseCalls : DBInterface
     public async Task<User> updateUser(User auth)
     {
         User temp = await _context.Users.FirstOrDefaultAsync(user => user.username == auth.username);
-        Console.WriteLine(temp.bio);
         temp.firstname = auth.firstname;
         temp.lastname = auth.lastname;
         temp.bio = auth.bio;
         await _context.SaveChangesAsync();
-
-        Console.WriteLine(auth.bio);
         return temp;
     }
 

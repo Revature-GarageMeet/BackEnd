@@ -37,9 +37,9 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
-        [ExcludeFromCodeCoverage]
-        
-        Task<Boolean> authenticateUser(User user);
+
+        // [ExcludeFromCodeCoverage]
+        // Task<Boolean> authenticateUser(User user);
         [ExcludeFromCodeCoverage]
         Task<User> otherProfileInfo(int userId);
 
