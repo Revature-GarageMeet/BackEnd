@@ -1,16 +1,57 @@
-﻿using Models;
+﻿using Xunit;
 using Moq;
+using Microsoft.EntityFrameworkCore; //dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
 using System;
-using Xunit;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+
+using Models;
+using Datalayer;
+using WebAPI.Controllers;
 
 namespace Datalayer
 {
     public class BandTests
     {
         private MockRepository mockRepository;
+
+        public Mock<DBInterface> mock = new Mock<DBInterface>();
+        private readonly DbContextOptions<GMDBContext> options;
+
+        private void Seed()
+        {
+            //this method sets up the db and ensures that the db is reset every time we test
+            using (var context = new GMDBContext(options))
+            {
+                //methods are self explanatory what they do, delete -> create -> save
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                //adding a default to the db, this is used to test below
+                context.Bands.Add(
+                    new Band()
+                    {
+                        id = 1,
+                        title = "test",
+                        description = "band",
+                        memberLimit = 1
+                    }
+                );
+                context.SaveChanges();
+            }
+        }
+
         public BandTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
+            //set options up to use a sqlite db called test.db
+            options = new DbContextOptionsBuilder<GMDBContext>()
+                    .UseSqlite("Filename=band.db").Options;
+            //call next method below
+            Seed();
+
         }
 
         public Mock<DBInterface> mock = new Mock<DBInterface>();
@@ -45,76 +86,6 @@ namespace Datalayer
             Assert.Equal("1", test.description);
         }
 
-        //     // Assert
-        //     Assert.True(false);
-        //     this.mockRepository.VerifyAll();
-        // }
-        [Fact]
-        public void GetSetBandId()
-        {
-            Band band = new Band();
-            band.id = 1;
-
-            Assert.Equal(1, band.id);
-        }
-        [Fact]
-        public void GetSetBandTitle()
-        {
-            Band band = new Band();
-            band.title = "test";
-
-            Assert.Equal("test", band.title);
-        }
-        [Fact]
-        public void GetSetBandDescription()
-        {
-            Band band = new Band();
-            band.description = "test";
-
-            Assert.Equal("test", band.title);
-        }
-        [Fact]
-        public void GetSetMemberLimit()
-        {
-            Band band = new Band();
-            band.memberLimit = 1;
-
-            Assert.Equal(1, band.memberLimit);
-        }
-        [Fact]
-        public async Task GetAllBandsTest()
-        {
-            int testBandId = 1;
-            List<string> testList = new List<string>();
-
-            mock.Setup(dl => dl.GetAllBandNames()).ReturnsAsync(testList);
-
-            BandController mockPost = new BandController(mock.Object);
-            List<string> compare = await mockPost.GetAll(testBandId);
-
-            Assert.Equal(testList, compare);
-
-            mock.Verify(dl => dl.GetAllBandNames());
-        }
-        [Fact]
-        public async void CheckIfNameIsTakenTest()
-        {
-            string testBandTitle = "test";
-            bool testBool = true;
-
-            mock.Setup(dl => dl.CheckIfBandExists(testBandTitle)).ReturnsAsync(testBool);
-
-            BandController mockPost = new BandController(mock.Object);
-            bool compare = await mockPost.CheckIfNameIsTaken(testBandTitle);
-
-            Assert.Equal(testBool, compare);
-
-            mock.Verify(dl => dl.CheckIfBandExists(testBandTitle));
-        }
-        [Fact]
-        public async void GetBandDetailsTest()
-        {
-        } 
         [Fact]
         public void GetSetBandMemberLimit()
         {
@@ -122,5 +93,64 @@ namespace Datalayer
             test.memberLimit = 1;
             Assert.Equal(1, test.memberLimit);
         }
+
+        [Fact]
+        public void DBCreateBand()
+        {
+            using (var context = new GMDBContext(options))
+            {
+                DBInterface repo = new DatabaseCalls(context);
+                Band test = new Band()
+                {
+                    id = 2,
+                    title = "test",
+                    description = "band",
+                    memberLimit = 1
+                };
+                repo.CreateBand(test);
+            }
+
+            using (var context = new GMDBContext(options))
+            {
+                Band test = context.Bands.FirstOrDefault(r => r.id == 2);
+                Assert.NotNull(test);
+                Assert.Equal("test", test.title);
+                Assert.Equal("band", test.description);
+                Assert.Equal(1, test.memberLimit);
+            }
+        }
+        [Fact]
+        public void UpdateBand()
+        {
+            using (var context = new GMDBContext(options))
+            {
+                DBInterface repo = new DatabaseCalls(context);
+                Band test = new Band()
+                {
+                    id = 1,
+                    title = "test",
+                    description = "test2",
+                    memberLimit = 1
+                };
+                repo.UpdateBand(test);
+            }
+            using (var context = new GMDBContext(options))
+            {
+                Band test = context.Bands.FirstOrDefault(r => r.id == 1);
+                Assert.NotNull(test);
+                Assert.Equal("test", test.title);
+                Assert.Equal("test2", test.description);
+                Assert.Equal(1, test.memberLimit);
+            }
+        }
     }
+
+
+    /*
+        UNTESTED:
+        get memberlist
+        get band (id)
+        get all bands
+        delete band
+    */
 }

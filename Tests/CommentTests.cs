@@ -1,11 +1,15 @@
 using Xunit;
 using Moq;
+using Microsoft.EntityFrameworkCore; //dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+
 using Models;
 using Datalayer;
 using WebAPI.Controllers;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 
 namespace Tests;
 
@@ -17,6 +21,40 @@ public class CommentTests
 {
     public Mock<DBInterface> mock = new Mock<DBInterface>();
 
+    // private readonly DbContextOptions<GMDBContext> options;
+
+    // public CommentTests()
+    // {
+    //     //set options up to use a sqlite db called test.db
+    //     options = new DbContextOptionsBuilder<GMDBContext>()
+    //             .UseSqlite("Filename=comments.db").Options;
+    //     //call next method below
+    //     Seed();
+    // }
+    // private void Seed()
+    // {
+    //     //this method sets up the db and ensures that the db is reset every time we test
+    //     using (var context = new GMDBContext(options))
+    //     {
+    //         //methods are self explanatory what they do, delete -> create -> save
+    //         context.Database.EnsureDeleted();
+    //         context.Database.EnsureCreated();
+
+    //         //adding a default to the db, this is used to test below
+    //         // context.Comments.Add(
+    //         //     new Comment()
+    //         //     {
+    //         //         id = 1,
+    //         //         userId = 1,
+    //         //         postId = 1,
+    //         //         entry = "test",
+    //         //         likes = 1,
+    //         //         dateCreated = DateTime.Now
+    //         //     }
+    //         //     );
+    //         context.SaveChanges();
+    //     }
+    // }
     // Test model
     [Fact]
     public void GetSetCommentID()
@@ -223,4 +261,57 @@ public class CommentTests
         mock.Verify(dl => dl.UpdateCommentAsync(updatedFakeComment), Times.Once());
     }
     // End of controller tests
+
+    //DB Calls Tests
+    // [Fact]
+    // public void DBAddComment()
+    // {
+    //     using (var context = new GMDBContext(options))
+    //     {
+    //         DBInterface repo = new DatabaseCalls(context);
+    //         Comment test = new Comment()
+    //         {
+    //             id = 2,
+    //             userId = 1,
+    //             postId = 1,
+    //             entry = "test",
+    //             likes = 1,
+    //             dateCreated = DateTime.Now
+    //         };
+    //         repo.AddCommentAsync(test);
+    //     }
+    //     using (var context = new GMDBContext(options))
+    //     {
+    //         Comment tester = context.Comments.FirstOrDefault(r => r.id == 2);
+    //         //check if not null -> check if matches above
+    //         Assert.NotNull(tester);
+    //         Assert.Equal(1, tester.userId);
+    //         Assert.Equal(1, tester.postId);
+    //         Assert.Equal("test", tester.entry);
+    //         Assert.Equal(1, tester.likes);
+    //     }
+    // }
+    // [Fact]
+    // public async Task DBGetComment()
+    // {
+    //     using (var context = new GMDBContext(options))
+    //     {
+    //         DBInterface repo = new DatabaseCalls(context);
+
+    //         Comment test = await repo.GetCommentAsync(1);
+    //         Assert.NotNull(test);
+    //         Assert.Equal(1, test.userId);
+    //         Assert.Equal(1, test.postId);
+    //         Assert.Equal("test", test.entry);
+    //         Assert.Equal(1, test.likes);
+    //     }
+    // }
+
+
+    /*
+        add comment
+        get comment
+        get all comment
+        update comment
+    */
 }
