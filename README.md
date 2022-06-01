@@ -22,15 +22,27 @@ _DevOPS_:
 
 ## Contributors
 Donte Jean-Pierre
+
 Mo Elsamahi
+
 Leo Doan
+
 Gianny Brea
+
 Lara Tchani
+
 Rey Vergara
+
 Matthew Cooper
+
 Brandon Childs
+
 Tucker Fabin
+
 Austin Burns
+
 Arrion Wilson
+
 Bailey Barton
+
 Jose Mendoza
