@@ -40,6 +40,11 @@ public class UserController : ControllerBase
     {
         return await _db.updateUser(user);
     }
+    [HttpGet("GetUserByID/{userId}")]
+    public async Task<User> GetUserByIDAsync(int userId)
+    {
+        return await _db.GetUserByIDAsync(userId);
+    }
 }
 /*
    post createuser

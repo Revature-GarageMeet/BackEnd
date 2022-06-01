@@ -141,5 +141,8 @@ Task UnlikePostAsync(int postId, int user);
         /// <param name="bandId"></param>
         /// <returns></returns>
         Task<List<string>> GetAllBandNames(int bandId);
+Task    <List<Post>> GetHomepagePostsAsync(int userId);
+        Task<User> GetUserByIDAsync(int userId);
+
     }
 }

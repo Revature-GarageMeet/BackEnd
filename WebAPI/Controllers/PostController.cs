@@ -109,6 +109,12 @@ public class PostController : ControllerBase
     {
         await _db.deletePostAsync(postId);
     }
+
+    [HttpGet("GetHomepagePosts/{userId}")]
+    public async Task<List<Post>> GetHomepagePostsAsync(int userId)
+    {
+        return await _db.GetHomepagePostsAsync(userId);
+    }
 }
 /*
     post create post
