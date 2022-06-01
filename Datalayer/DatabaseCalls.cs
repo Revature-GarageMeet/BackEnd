@@ -170,6 +170,10 @@ public class DatabaseCalls : DBInterface
         return await _context.LikedPosts.AsNoTracking().Where(t => t.userid == userId).ToListAsync();
     }
 
+    public async Task<bool> CheckIfLiked(int postId, int userId)
+    {
+        return await _context.LikedPosts.AnyAsync(liked => liked.postid == postId && liked.userid == userId);
+    }
 
 
 

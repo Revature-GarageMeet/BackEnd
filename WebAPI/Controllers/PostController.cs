@@ -97,7 +97,11 @@ public class PostController : ControllerBase
     {
         await _db.LikePostAsync(postId, userId);
     }
-    
+
+    [HttpGet("VerifyIfLiked/{postId}/{userId}")]
+    public async Task<bool> verifyIfLiked(int postId, int userId) {
+        return await _db.CheckIfLiked(postId, userId);
+    }
 
     [HttpGet("GetPostLikes/{postId}")]
     public async Task<int> GetPostLikesAsync(int postId)

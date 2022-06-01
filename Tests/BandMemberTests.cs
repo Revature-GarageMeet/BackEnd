@@ -82,7 +82,7 @@ public class BandMemberTests
             dateJoined = DateTime.UtcNow
         };
 
-        mock.Setup(p => p.RemoveBandMember(deleteBandMem));
+        mock.Setup(p => p.RemoveBandMember(deleteBandMem.id));
         BandMemberController bandMem = new BandMemberController(mock.Object);
         await bandMem.Delete(deleteBandMem);
         mock.Verify(p => p.RemoveBandMember(deleteBandMem));
