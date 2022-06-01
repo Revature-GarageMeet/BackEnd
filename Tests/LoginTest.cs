@@ -23,7 +23,7 @@ namespace Tests
         {
             //set options up to use a sqlite db called test.db
             options = new DbContextOptionsBuilder<GMDBContext>()
-                    .UseSqlite("Filename=test.db").Options;
+                    .UseSqlite("Filename=login.db").Options;
             //call next method below
             Seed();
         }
