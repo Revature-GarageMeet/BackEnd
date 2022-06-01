@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj": {
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj",
+        "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj",
         "projectName": "Datalayer",
-        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj",
-        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\obj\\",
+        "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj",
+        "packagesPath": "C:\\Users\\Brandon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Brandon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj"
+              "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj"
               }
             }
           }
@@ -80,21 +80,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\obj\\",
+        "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\Brandon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Brandon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -134,21 +134,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\chain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\Brandon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Brandon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -162,11 +162,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj": {
-                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Datalayer\\Datalayer.csproj"
+              "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj": {
+                "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj"
               },
-              "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\chain\\Desktop\\work\\Week 1 Repo\\P3\\BackEnd\\Models\\Models.csproj"
+              "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj"
               }
             }
           }
@@ -226,7 +226,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

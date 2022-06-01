@@ -54,6 +54,8 @@ namespace Datalayer
 
         }
 
+        public Mock<DBInterface> mock = new Mock<DBInterface>();
+        
         private Band CreateBand()
         {
             return new Band();

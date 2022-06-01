@@ -73,7 +73,6 @@ namespace Datalayer
         /// </summary>
         [ExcludeFromCodeCoverage]
         Task postForBandMemsAsync(int bandId, string textEntry, int userID, string postType);
-
         /// <summary>
         /// Posts of a band's Id
         /// </summary>

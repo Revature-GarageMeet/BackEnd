@@ -56,10 +56,7 @@ public class DatabaseCalls : DBInterface
 
     //************************************************ Post Related Things ************************************************
 
-    public async Task<List<Post>> getAllPosts()
-    {
-        return await _context.Posts.ToListAsync();
-    }
+    
 
 
     // public async Task postForBandAsync(int bandId, string textEntry, string postType)
@@ -101,7 +98,7 @@ public class DatabaseCalls : DBInterface
 
         // might not work, just put it here for now. Also allows for inifite likes
 
-        LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
+        LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).FirstOrDefaultAsync();
 
         if (testPost == null)
         {
@@ -163,11 +160,7 @@ public class DatabaseCalls : DBInterface
     }
 
 
-    public async Task<int> GetPostLikesAsync(int postId)
-    {
-        int postLikes = await _context.LikedPosts.CountAsync(t => t.postid == postId);
-        return postLikes;
-    }
+    
 
     public async Task<List<LikedPosts>> GetUserLikesAsync(int userId)
     {
@@ -367,6 +360,17 @@ public class DatabaseCalls : DBInterface
 
         return temp;
     }
+
+    public async Task<List<Post>> getAllPosts()
+    {
+        List<Post> temp = await _context.Posts.ToListAsync();
+        
+        foreach (Post _post in temp)
+        {
+            _post.likes = await GetPostLikesAsync(_post.id);
+        }
+        return temp; 
+    }
     public async Task<List<Post>> getPostbyUserIdAsync(int userId)
     {
         List<Post> temp = await _context.Posts.FromSqlRaw($"SELECT * FROM Posts WHERE userId = {userId}").ToListAsync();
@@ -376,6 +380,13 @@ public class DatabaseCalls : DBInterface
         }
         return temp;
     }
+
+    public async Task<int> GetPostLikesAsync(int postId)
+    {
+        int postLikes = await _context.LikedPosts.CountAsync(t => t.postid == postId);
+        return postLikes;
+    }
+    
 
     public async Task<List<Post>> getPostbyBandIdAsync(int bandId)
     {
