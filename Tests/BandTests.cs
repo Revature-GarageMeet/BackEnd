@@ -45,7 +45,6 @@ namespace Datalayer
             Assert.Equal("1", test.description);
         }
 
-<<<<<<< HEAD
         //     // Assert
         //     Assert.True(false);
         //     this.mockRepository.VerifyAll();
@@ -115,15 +114,13 @@ namespace Datalayer
         [Fact]
         public async void GetBandDetailsTest()
         {
-            
-=======
+        } 
         [Fact]
         public void GetSetBandMemberLimit()
         {
             Band test = new Band();
             test.memberLimit = 1;
             Assert.Equal(1, test.memberLimit);
->>>>>>> a6db8ce8146a329169a9cae966e29de665519283
         }
     }
 }
