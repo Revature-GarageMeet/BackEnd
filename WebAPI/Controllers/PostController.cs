@@ -87,7 +87,7 @@ public class PostController : ControllerBase
     }
 
     [HttpGet("GetLikes/{userId}")]
-    public async Task<List<LikedPosts>>GetUserLikesAsync(int userId)
+    public async Task<List<LikedPosts>> GetUserLikesAsync(int userId)
     {
         return await _db.GetUserLikesAsync(userId);
     }
@@ -97,7 +97,12 @@ public class PostController : ControllerBase
     {
         await _db.LikePostAsync(postId, userId);
     }
-    
+
+    [HttpGet("VerifyIfLiked/{postId}/{userId}")]
+    public async Task<bool> verifyIfLiked(int postId, int userId) 
+    {
+        return await _db.CheckIfLiked(postId, userId);
+    }
 
     [HttpGet("GetPostLikes/{postId}")]
     public async Task<int> GetPostLikesAsync(int postId)
@@ -110,7 +115,7 @@ public class PostController : ControllerBase
     {
         return await _db.getAllPosts();
     }
-    
+
     [HttpDelete("UnlikePost/{postId}/{userId}")]
     public async Task UnlikePostAsyinc(int postId, int userId)
     {

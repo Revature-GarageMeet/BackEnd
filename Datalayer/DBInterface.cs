@@ -75,6 +75,7 @@ namespace Datalayer
         Task UnlikePostAsync(int postId, int user);
         Task<int> GetPostLikesAsync(int postId);
         Task<List<LikedPosts>> GetUserLikesAsync(int userId);
+        Task<bool> CheckIfLiked(int postId, int userId);
 
         Task<List<Post>> getAllPosts();
 

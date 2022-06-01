@@ -8,33 +8,97 @@ namespace Datalayer
     public class BandTests
     {
         private MockRepository mockRepository;
-
-
-
         public BandTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
         }
 
+        public Mock<DBInterface> mock = new Mock<DBInterface>();
+        
         private Band CreateBand()
         {
             return new Band();
         }
 
+        // [Fact]
+        // public void TestMethod1()
+        // {
+        //     // Arrange
+        //     var band = this.CreateBand();
+
+        //     // Act
+
+
+        //     // Assert
+        //     Assert.True(false);
+        //     this.mockRepository.VerifyAll();
+        // }
         [Fact]
-        public void TestMethod1()
+        public void GetSetBandId()
         {
-            // Arrange
-            var band = this.CreateBand();
+            Band band = new Band();
+            band.id = 1;
 
-            // Act
+            Assert.Equal(1, band.id);
+        }
+        [Fact]
+        public void GetSetBandTitle()
+        {
+            Band band = new Band();
+            band.title = "test";
 
+            Assert.Equal("test", band.title);
+        }
+        [Fact]
+        public void GetSetBandDescription()
+        {
+            Band band = new Band();
+            band.description = "test";
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
+            Assert.Equal("test", band.title);
+        }
+        [Fact]
+        public void GetSetMemberLimit()
+        {
+            Band band = new Band();
+            band.memberLimit = 1;
+
+            Assert.Equal(1, band.memberLimit);
+        }
+        [Fact]
+        public async Task GetAllBandsTest()
+        {
+            int testBandId = 1;
+            List<string> testList = new List<string>();
+
+            mock.Setup(dl => dl.GetAllBandNames()).ReturnsAsync(testList);
+
+            BandController mockPost = new BandController(mock.Object);
+            List<string> compare = await mockPost.GetAll(testBandId);
+
+            Assert.Equal(testList, compare);
+
+            mock.Verify(dl => dl.GetAllBandNames());
+        }
+        [Fact]
+        public async void CheckIfNameIsTakenTest()
+        {
+            string testBandTitle = "test";
+            bool testBool = true;
+
+            mock.Setup(dl => dl.CheckIfBandExists(testBandTitle)).ReturnsAsync(testBool);
+
+            BandController mockPost = new BandController(mock.Object);
+            bool compare = await mockPost.CheckIfNameIsTaken(testBandTitle);
+
+            Assert.Equal(testBool, compare);
+
+            mock.Verify(dl => dl.CheckIfBandExists(testBandTitle));
+        }
+        [Fact]
+        public async void GetBandDetailsTest()
+        {
+            
         }
     }
 }

@@ -56,7 +56,7 @@ public class DatabaseCalls : DBInterface
     }
 
     //************************************************ Post Related Things ************************************************
-    
+
     public async Task<List<Post>> getAllPosts()
     {
         return await _context.Posts.ToListAsync();
@@ -175,6 +175,10 @@ public class DatabaseCalls : DBInterface
         return await _context.LikedPosts.AsNoTracking().Where(t => t.userid == userId).ToListAsync();
     }
 
+    public async Task<bool> CheckIfLiked(int postId, int userId)
+    {
+        return await _context.LikedPosts.AnyAsync(liked => liked.postid == postId && liked.userid == userId);
+    }
 
 
 
@@ -318,7 +322,8 @@ public class DatabaseCalls : DBInterface
         return await _context.BandMembers.AnyAsync(bandmem => bandmem.userId == userId);
     }
 
-    public async Task<bool> CheckIfBandExists(string bandTitle) {
+    public async Task<bool> CheckIfBandExists(string bandTitle)
+    {
         return await _context.Bands.AnyAsync(band => band.title == bandTitle);
     }
 
