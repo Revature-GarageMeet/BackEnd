@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj": {}
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
     "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj": {
@@ -138,14 +138,14 @@
         }
       }
     },
-    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj": {
+    "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\WebAPI.csproj",
+        "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\Brandon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\webapi\\obj\\",
+        "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Brandon\\AppData\\Roaming\\NuGet\\NuGet.Config",
