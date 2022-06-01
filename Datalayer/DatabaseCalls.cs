@@ -183,16 +183,7 @@ public class DatabaseCalls : DBInterface
 
 
 
-    public async Task deletePostAsync(int postId)
-    {
-        //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
-        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
-        if (temp != null)
-        {
-            _context.Posts.Remove(temp);
-        }
-        await _context.SaveChangesAsync();
-    }
+    
 
     /// <summary>
     ///     Author: Jose
@@ -348,7 +339,73 @@ public class DatabaseCalls : DBInterface
         throw new NotImplementedException();
     }
 
-    #region Getting Posts
+    #region Posts
+
+    // public async Task LikePostAsync(int postId, int userId)
+    // {
+    
+    //     // might not work, just put it here for now. Also allows for inifite likes
+        
+    //     LikedPosts testPost = await _context.LikedPosts.Where(t => t.postid == postId && t.userid == userId).SingleOrDefaultAsync();
+        
+    //     if(testPost == null) 
+    //     {
+    //         testPost = new LikedPosts()
+    //         {
+    //             userid = userId,
+    //             postid = postId
+    //         };
+    //         Console.WriteLine("Liking the Post");
+    //         await _context.LikedPosts.AddAsync(testPost);
+    //         await _context.SaveChangesAsync();
+    //     }
+    //     else
+    //     {
+    //         Console.WriteLine($"Un-Liking the Post");
+    //         // _context.LikedPosts.Update(_context.LikedPosts.Remove(testPost));
+    //         _context.LikedPosts.Remove(testPost);
+            
+    //         await _context.SaveChangesAsync();
+            
+    //         // try
+    //         // {
+    //         // _context.LikedPosts.Remove(testPost);
+
+    //         // _context.SaveChanges();
+    //         // }
+    //         // catch(DbUpdateConcurrencyException ex)
+    //         // {
+                
+    //         //     throw new Exception("Record does not exist in the database: " + ex.Message);
+    //         // }
+    //         // catch(Exception ex)
+    //         // {
+    //         //     throw;
+    //         // }
+            
+    //     }
+        
+        
+    //     // Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+    //     // if (temp != null)
+    //     // {
+    //     //     temp.likes++;
+    //     //     _context.Posts.Update(temp);
+    //     // }
+    //     // //_context.Posts.FromSqlRaw($"UPDATE Posts SET likes = likes + 1 WHERE id = {postId}");
+    //     // await _context.SaveChangesAsync();
+    // }
+
+   public async Task deletePostAsync(int postId)
+    {
+        //_context.Posts.FromSqlRaw($"DELETE from Posts WHERE id={postId}");
+        Post temp = await _context.Posts.FirstOrDefaultAsync(t => t.id == postId);
+        if (temp != null)
+        {
+            _context.Posts.Remove(temp);
+        }
+        await _context.SaveChangesAsync();
+    }
 
     public async Task<Post> GetPostByPostID(int postID)
     {
@@ -388,11 +445,26 @@ public class DatabaseCalls : DBInterface
     }
 
 
+  
+
+    
+
     #endregion
 
-    #region  
+    public async Task<User> GetUserByIDAsync(int userId)
+    {
+        User test = await _context.Users.FirstOrDefaultAsync(t => t.id == userId);
+        test.password = "";
 
-    #endregion
+        return test;
+    }
+
+    public async Task<List<Post>> GetHomepagePostsAsync(int userId)
+    {
+        List<Post> tempPosts = await _context.Posts.AsNoTracking().Where(t => t.userId != userId).ToListAsync();
+        return tempPosts;
+    }
+
 }
 
 
