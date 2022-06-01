@@ -86,6 +86,31 @@ public class PostsTests
         Assert.Equal(comment, postComments[0]);
     }
 
+    //Liked Post
+    [Fact]
+    public void GetSetLikedPostId()
+    {
+        LikedPosts test = new LikedPosts();
+        test.id = 1;
+        Assert.Equal(1 , test.id);
+    }
+
+    [Fact]
+    public void GetSetLikedPostUser()
+    {
+        LikedPosts test = new LikedPosts();
+        test.userid = 1;
+        Assert.Equal(1 , test.userid);
+    }
+
+    [Fact]
+    public void GetSetLikedPostPost()
+    {
+        LikedPosts test = new LikedPosts();
+        test.postid = 1;
+        Assert.Equal(1 , test.postid);
+    }
+
     // Test Controller
     [Fact]
     public async Task GetPostsByBandID()

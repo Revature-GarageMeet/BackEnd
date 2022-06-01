@@ -20,15 +20,32 @@ namespace Datalayer
             return new Band();
         }
 
-        // [Fact]
-        // public void TestMethod1()
-        // {
-        //     // Arrange
-        //     var band = this.CreateBand();
+        //Model
+        [Fact]
+        public void GetSetBandId()
+        {
+            Band test = new Band();
+            test.id = 1;
+            Assert.Equal(1, test.id);
+        }
 
-        //     // Act
+        [Fact]
+        public void GetSetBandTitle()
+        {
+            Band test = new Band();
+            test.title = "1";
+            Assert.Equal("1", test.title);
+        }
 
+        [Fact]
+        public void GetSetBandDesc()
+        {
+            Band test = new Band();
+            test.description = "1";
+            Assert.Equal("1", test.description);
+        }
 
+<<<<<<< HEAD
         //     // Assert
         //     Assert.True(false);
         //     this.mockRepository.VerifyAll();
@@ -99,6 +116,14 @@ namespace Datalayer
         public async void GetBandDetailsTest()
         {
             
+=======
+        [Fact]
+        public void GetSetBandMemberLimit()
+        {
+            Band test = new Band();
+            test.memberLimit = 1;
+            Assert.Equal(1, test.memberLimit);
+>>>>>>> a6db8ce8146a329169a9cae966e29de665519283
         }
     }
 }
