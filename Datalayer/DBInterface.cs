@@ -29,7 +29,7 @@ namespace Datalayer
         /// </summary>
         /// <param name="user">User to check</param>
         /// <returns>True if matched, False if doesn't</returns>
-        Task<Boolean> authenticateUser(User user);
+        // Task<Boolean> authenticateUser(User user);
         Task<User> otherProfileInfo(int userId);
 
 
