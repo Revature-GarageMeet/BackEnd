@@ -35,7 +35,7 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<GMDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GarageMeetDBDev"))); //REMOVE THE 'Dev' WHEN WE GO TO RELEASE ~Leo
+builder.Services.AddDbContext<GMDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GarageMeetDB"))); //REMOVE THE 'Dev' WHEN WE GO TO RELEASE ~Leo
 builder.Services.AddScoped<DBInterface, DatabaseCalls>();
 
 var app = builder.Build();

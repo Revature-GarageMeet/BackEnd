@@ -1877,20 +1877,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Brandon\\.nuget\\packages\\": {}
+    "C:\\Users\\Bailey\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj",
+      "projectUniqueName": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
       "projectName": "Datalayer",
-      "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\Datalayer.csproj",
-      "packagesPath": "C:\\Users\\Brandon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Datalayer\\obj\\",
+      "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\Datalayer.csproj",
+      "packagesPath": "C:\\Users\\Bailey\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Datalayer\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Brandon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Bailey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1903,8 +1913,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Brandon\\Desktop\\Garage\\gmb\\backend\\Models\\Models.csproj"
+            "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Bailey\\Documents\\RevatureWork\\BackEnd\\Models\\Models.csproj"
             }
           }
         }
@@ -1955,7 +1965,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
